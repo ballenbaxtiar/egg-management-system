@@ -69,8 +69,42 @@
       </section>
     </div>
   </main>
-
   <script>
+    const form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const res = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          // ✅ Save token and user data to localStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          if (data.user.type === 'ئەدمین') {
+            window.location.href = 'index.html';
+          } else if (data.user.type === 'لاوەکی') {
+            window.location.href = 'watcher/index.html';
+          }
+        } else {
+          alert("❌ " + data.message);
+        }
+      } catch (error) {
+        alert("❌ Connection error: " + error.message);
+      }
+    });
+  </script>
+  <!-- <script>
     // Simpler version - backend knows user type from username
 
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -107,7 +141,7 @@
         alert('هەڵەیەک ڕوویدا!');
       }
     });
-  </script>
+  </script> -->
 </body>
 
 </html>
