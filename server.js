@@ -86,13 +86,26 @@ const Farm3 = mongoose.model("Farm3", farmSchema, "farm3");
 const Farm4 = mongoose.model("Farm4", farmSchema, "farm4");
 
 // DB connect
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
+// ✅ Optimized MongoDB Connection for Vercel
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected) return;
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+    isConnected = true;
     console.log("✅ MongoDB Connected");
-    testDatabaseConnection();
-  })
-  .catch((err) => console.log("❌", err));
+  } catch (err) {
+    console.error("❌ MongoDB Connection Error:", err);
+  }
+};
+
+// Middleware to ensure DB is connected before handling requests
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 async function testDatabaseConnection() {
   try {
@@ -703,6 +716,13 @@ app.use(express.static("public"));
 app.use("/assets", express.static("assets"));
 app.use("/watcher/assets", express.static("assets"));
 
-app.listen(3000, () => {
-  console.log("🚀 Server running on http://localhost:3000");
-});
+// Export for Vercel
+module.exports = app;
+
+// Only listen if running locally
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
+}
