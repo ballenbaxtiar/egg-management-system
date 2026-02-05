@@ -7,19 +7,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/assets/$1" },
-    { "source": "/api/(.*)", "destination": "/server.js" },
-    { "source": "/register", "destination": "/server.js" },
-    { "source": "/login", "destination": "/server.js" },
-    { "source": "/verify", "destination": "/server.js" },
-    { "source": "/profile", "destination": "/server.js" },
-    { "source": "/users/(.*)", "destination": "/server.js" },
-    { "source": "/farm1(.*)", "destination": "/server.js" },
-    { "source": "/farm2(.*)", "destination": "/server.js" },
-    { "source": "/farm3(.*)", "destination": "/server.js" },
-    { "source": "/farm4(.*)", "destination": "/server.js" },
-    { "source": "/settings", "destination": "/server.js" },
-    { "source": "/(.*)", "destination": "/public/$1" }
+    { "source": "/(.*)", "destination": "/server.js" }
   ],
   "cleanUrls": true
 }

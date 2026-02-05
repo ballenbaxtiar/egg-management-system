@@ -55,23 +55,14 @@ const Settings = mongoose.model('Settings', settingsSchema);
 let cachedDb = null;
 
 const connectDB = async () => {
-  if (cachedDb) {
-    console.log("✅ Using cached MongoDB connection");
-    return cachedDb;
-  }
-
-  if (!process.env.MONGODB_URI) {
-    console.error("❌ MONGODB_URI is not defined in environment variables");
-    return null;
-  }
+  if (cachedDb) return cachedDb;
+  if (!process.env.MONGODB_URI) return null;
 
   try {
-    console.log("🔍 Connecting to MongoDB...");
     const db = await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000,
     });
     cachedDb = db;
-    console.log("✅ MongoDB Connected");
     return db;
   } catch (err) {
     console.error("❌ MongoDB Connection Error:", err);
@@ -79,7 +70,6 @@ const connectDB = async () => {
   }
 };
 
-// Middleware to ensure DB is connected before handling requests
 app.use(async (req, res, next) => {
   await connectDB();
   next();
@@ -91,10 +81,7 @@ app.use(async (req, res, next) => {
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];
-
-  if (!token) {
-    return res.status(403).json({ message: "No token provided" });
-  }
+  if (!token) return res.status(403).json({ message: "No token provided" });
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
@@ -106,16 +93,13 @@ const verifyToken = (req, res, next) => {
 };
 
 // ============================================
-// ROUTES
+// API ROUTES
 // ============================================
 
-// Register route
 app.post("/register", async (req, res) => {
   try {
     const { username, password, firstname, lastname, type } = req.body;
-    const newUser = new User({
-      _id: { username, password, firstname, lastname, type }
-    });
+    const newUser = new User({ _id: { username, password, firstname, lastname, type } });
     await newUser.save();
     res.json({ message: "User created successfully" });
   } catch (error) {
@@ -123,27 +107,17 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Login route
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await User.findOne({ "_id.username": username }).lean();
-        if (!user) {
-            return res.status(401).json({ message: "User not found" });
-        }
+        if (!user) return res.status(401).json({ message: "User not found" });
         
         const storedPassword = user._id?.password;
-        if (storedPassword !== password) {
-            return res.status(401).json({ message: "Wrong password" });
-        }
+        if (storedPassword !== password) return res.status(401).json({ message: "Wrong password" });
         
         const token = jwt.sign(
-            { 
-                username: user._id.username,
-                firstname: user._id.firstname,
-                lastname: user._id.lastname,
-                type: user._id.type
-            },
+            { username: user._id.username, firstname: user._id.firstname, lastname: user._id.lastname, type: user._id.type },
             process.env.JWT_SECRET || 'your-secret-key',
             { expiresIn: "24h" }
         );
@@ -151,44 +125,15 @@ app.post("/login", async (req, res) => {
         res.json({ 
             message: "Login success",
             token: token,
-            user: {
-                username: user._id.username,
-                firstname: user._id.firstname,
-                lastname: user._id.lastname,
-                type: user._id.type
-            }
+            user: { username: user._id.username, firstname: user._id.firstname, lastname: user._id.lastname, type: user._id.type }
         });
     } catch (error) {
         res.status(500).json({ message: "Server error: " + error.message });
     }
 });
 
-app.get("/verify", verifyToken, (req, res) => {
-  res.json({ valid: true, user: req.user });
-});
+app.get("/verify", verifyToken, (req, res) => res.json({ valid: true, user: req.user }));
 
-app.get("/profile", verifyToken, (req, res) => {
-  res.json({ user: req.user });
-});
-
-app.get("/users", async (req, res) => {
-  try {
-    const users = await User.find({}).lean();
-    res.json({
-      count: users.length,
-      users: users.map((u) => ({
-        username: u._id.username,
-        firstname: u._id.firstname,
-        lastname: u._id.lastname,
-        type: u._id.type
-      })),
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Farm Routes (Simplified for brevity, but keeping the logic)
 const handleFarmRequest = async (req, res, farmNum) => {
   try {
     if (req.method === 'POST') {
@@ -210,34 +155,20 @@ app.all("/farm2", verifyToken, (req, res) => handleFarmRequest(req, res, 2));
 app.all("/farm3", verifyToken, (req, res) => handleFarmRequest(req, res, 3));
 app.all("/farm4", verifyToken, (req, res) => handleFarmRequest(req, res, 4));
 
-app.get("/settings", verifyToken, async (req, res) => {
-  try {
-    const username = req.user.username;
-    let settings = await Settings.findOne({ userId: username });
-    res.json({ settings: settings ? settings.settings : null });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+// ============================================
+// STATIC FILES & SPA ROUTING
+// ============================================
 
-app.post("/settings", verifyToken, async (req, res) => {
-  try {
-    const username = req.user.username;
-    const { settings } = req.body;
-    await Settings.findOneAndUpdate(
-      { userId: username },
-      { settings, updatedAt: new Date() },
-      { upsert: true, new: true }
-    );
-    res.json({ message: "Settings saved successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// ✅ Serve static files
+// Serve assets folder
 app.use("/assets", express.static(path.join(__dirname, "assets")));
+
+// Serve public folder
 app.use(express.static(path.join(__dirname, "public")));
+
+// Handle all other routes by serving index.html from public
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Export for Vercel
 module.exports = app;
