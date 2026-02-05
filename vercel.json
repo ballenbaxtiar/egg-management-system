@@ -14,59 +14,20 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/register",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/login",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/verify",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/profile",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/users/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/farm1(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/farm2(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/farm3(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/farm4(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/settings",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
-    }
+  "rewrites": [
+    { "source": "/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/api/(.*)", "destination": "/server.js" },
+    { "source": "/register", "destination": "/server.js" },
+    { "source": "/login", "destination": "/server.js" },
+    { "source": "/verify", "destination": "/server.js" },
+    { "source": "/profile", "destination": "/server.js" },
+    { "source": "/users/(.*)", "destination": "/server.js" },
+    { "source": "/farm1(.*)", "destination": "/server.js" },
+    { "source": "/farm2(.*)", "destination": "/server.js" },
+    { "source": "/farm3(.*)", "destination": "/server.js" },
+    { "source": "/farm4(.*)", "destination": "/server.js" },
+    { "source": "/settings", "destination": "/server.js" },
+    { "source": "/((?!assets|public).* )", "destination": "/public/$1" }
   ],
   "cleanUrls": true
 }
