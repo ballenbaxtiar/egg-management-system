@@ -414,7 +414,7 @@
     async function loadFarmData() {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/farm1', {
+        const res = await fetch('/farm1', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

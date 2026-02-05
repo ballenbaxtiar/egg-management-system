@@ -81,7 +81,7 @@ const DEFAULT_SETTINGS = {
 async function loadSettings() {
   try {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:3000/settings', {
+    const res = await fetch('/settings', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const data = await res.json();
@@ -99,7 +99,7 @@ async function loadSettings() {
 async function saveSettingsToServer(settings) {
   try {
     const token = localStorage.getItem('token');
-    await fetch('http://localhost:3000/settings', {
+    await fetch('/settings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -354,7 +354,7 @@ async function exportAllData() {
     
     // Fetch data from all 4 farms
     for (let i = 1; i <= 4; i++) {
-      const res = await fetch(`http://localhost:3000/farm${i}`, {
+      const res = await fetch(`/farm${i}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();

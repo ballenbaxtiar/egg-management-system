@@ -543,7 +543,7 @@
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/farm4', {
+        const res = await fetch('/farm4', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -571,7 +571,7 @@
     async function loadFarmData() {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/farm4', {
+        const res = await fetch('/farm4', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -717,7 +717,7 @@
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:3000/farm4/${id}`, {
+        const res = await fetch(`/farm4/${id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -748,7 +748,7 @@
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:3000/farm4/${id}`, {
+        const res = await fetch(`/farm4/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

@@ -313,7 +313,7 @@
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/register', {
+        const res = await fetch('/register', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -345,7 +345,7 @@
         console.log('🔄 Loading admins...');
         console.log('Token:', token ? 'exists' : 'missing');
         
-        const res = await fetch('http://localhost:3000/users/admin', {
+        const res = await fetch('/users/admin', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -413,7 +413,7 @@
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:3000/users/${username}`, {
+        const res = await fetch(`/users/${username}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

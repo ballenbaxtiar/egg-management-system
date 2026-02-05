@@ -537,7 +537,7 @@ if (appSettings.farms.colors.farm1) {
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/farm3', {
+        const res = await fetch('/farm3', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -565,7 +565,7 @@ if (appSettings.farms.colors.farm1) {
     async function loadFarmData() {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/farm3', {
+        const res = await fetch('/farm3', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -711,7 +711,7 @@ if (appSettings.farms.colors.farm1) {
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:3000/farm3/${id}`, {
+        const res = await fetch(`/farm3/${id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -742,7 +742,7 @@ if (appSettings.farms.colors.farm1) {
 
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:3000/farm3/${id}`, {
+        const res = await fetch(`/farm3/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
