@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const app = express();
 
-// ✅ Important: CORS and JSON parsing MUST come first
+// ✅ Basic configuration
 app.use(cors());
 app.use(express.json());
 
@@ -24,7 +24,7 @@ const userSchemaOld = new mongoose.Schema({
     strict: false
 });
 
-const User = mongoose.model("User", userSchemaOld);
+const User = mongoose.models.User || mongoose.model("User", userSchemaOld);
 
 const farmSchema = new mongoose.Schema({
     eggs: { type: Number, required: true },
@@ -39,7 +39,7 @@ const farmSchema = new mongoose.Schema({
     timestamps: false
 });
 
-const Farm = mongoose.model("Farm", farmSchema);
+const Farm = mongoose.models.Farm || mongoose.model("Farm", farmSchema);
 
 const settingsSchema = new mongoose.Schema({
   userId: { type: String, required: true, unique: true },
@@ -47,57 +47,63 @@ const settingsSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 }, { strict: false });
 
-const Settings = mongoose.model('Settings', settingsSchema);
+const Settings = mongoose.models.Settings || mongoose.model('Settings', settingsSchema);
 
 // ============================================
-// DATABASE CONNECTION
+// DATABASE CONNECTION (Resilient)
 // ============================================
 let cachedDb = null;
 
 const connectDB = async () => {
-  if (cachedDb) return cachedDb;
-  if (!process.env.MONGODB_URI) return null;
+  if (cachedDb && mongoose.connection.readyState === 1) {
+    return cachedDb;
+  }
+
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    console.warn("⚠️ MONGODB_URI is not defined. Database features will be unavailable.");
+    return null;
+  }
 
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI, {
+    // Set strictQuery to avoid deprecation warnings
+    mongoose.set('strictQuery', false);
+    
+    const db = await mongoose.connect(uri, {
       serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 10000,
     });
     cachedDb = db;
+    console.log("✅ MongoDB Connected");
     return db;
   } catch (err) {
-    console.error("❌ MongoDB Connection Error:", err);
+    console.error("❌ MongoDB Connection Error:", err.message);
     return null;
   }
 };
 
+// Middleware to attempt DB connection but NOT block the request if it fails
 app.use(async (req, res, next) => {
-  await connectDB();
+  // Don't await here to prevent blocking the entire app if DB is slow/down
+  connectDB().catch(err => console.error("Background DB connection error:", err));
   next();
 });
-
-// ============================================
-// AUTH MIDDLEWARE
-// ============================================
-const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(" ")[1];
-  if (!token) return res.status(403).json({ message: "No token provided" });
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-    req.user = decoded;
-    next();
-  } catch (error) {
-    return res.status(401).json({ message: "Invalid or expired token" });
-  }
-};
 
 // ============================================
 // API ROUTES
 // ============================================
 
+app.get("/api/health", (req, res) => {
+  res.json({ 
+    status: "ok", 
+    database: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    env: process.env.NODE_ENV || "development"
+  });
+});
+
 app.post("/register", async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) throw new Error("Database not connected");
     const { username, password, firstname, lastname, type } = req.body;
     const newUser = new User({ _id: { username, password, firstname, lastname, type } });
     await newUser.save();
@@ -110,6 +116,7 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
+        if (mongoose.connection.readyState !== 1) throw new Error("Database not connected");
         const user = await User.findOne({ "_id.username": username }).lean();
         if (!user) return res.status(401).json({ message: "User not found" });
         
@@ -132,29 +139,6 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get("/verify", verifyToken, (req, res) => res.json({ valid: true, user: req.user }));
-
-const handleFarmRequest = async (req, res, farmNum) => {
-  try {
-    if (req.method === 'POST') {
-      const { eggs, flats, packets, date } = req.body;
-      const newRecord = new Farm({ eggs, flats, packets, date, farmNumber: farmNum });
-      await newRecord.save();
-      return res.json({ message: `Farm${farmNum} record created`, record: newRecord });
-    } else if (req.method === 'GET') {
-      const records = await Farm.find({ farmNumber: farmNum }).sort({ createdAt: -1 });
-      return res.json({ records });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-app.all("/farm1", verifyToken, (req, res) => handleFarmRequest(req, res, 1));
-app.all("/farm2", verifyToken, (req, res) => handleFarmRequest(req, res, 2));
-app.all("/farm3", verifyToken, (req, res) => handleFarmRequest(req, res, 3));
-app.all("/farm4", verifyToken, (req, res) => handleFarmRequest(req, res, 4));
-
 // ============================================
 // STATIC FILES & SPA ROUTING
 // ============================================
@@ -167,7 +151,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Handle all other routes by serving index.html from public
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"), (err) => {
+    if (err) {
+      res.status(404).send("File not found");
+    }
+  });
 });
 
 // Export for Vercel
