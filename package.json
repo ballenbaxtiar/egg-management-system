@@ -1,5 +1,5 @@
 {
-  "name": "niceadmin",
+  "name": "egg-farm-backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
