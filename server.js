@@ -640,7 +640,7 @@ app.post("/settings", verifyToken, async (req, res) => {
 // ============================================
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
-app.use("/watcher/assets", express.static(path.join(__dirname, "assets")));
+app.use("/watcher/assets", express.static("assets"));
 
 // ============================================
 // START SERVER
