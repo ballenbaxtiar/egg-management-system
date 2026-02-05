@@ -193,9 +193,15 @@ app.post("/login", async (req, res) => {
         }
         
         const storedPassword = user._id?.password || user._id.password;
-        console.log("🔐 Checking password...");
         
-        if (storedPassword !== password) {
+        // 🔥 ADD THESE DEBUG LOGS:
+        console.log("🔐 Stored password:", storedPassword);
+        console.log("🔐 Input password:", password);
+        console.log("🔐 Trimmed stored:", storedPassword?.trim());
+        console.log("🔐 Trimmed input:", password?.trim());
+        
+        // 🔥 FIX: Trim both passwords before comparing
+        if (storedPassword?.trim() !== password?.trim()) {
             console.log("❌ Wrong password");
             return res.status(401).json({ message: "Wrong password" });
         }
@@ -634,6 +640,7 @@ app.post("/settings", verifyToken, async (req, res) => {
 // ============================================
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
+app.use("/watcher/assets", express.static(path.join(__dirname, "assets")));
 
 // ============================================
 // START SERVER

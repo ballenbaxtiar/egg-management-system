@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>سەرژمێری هێلکە \ پەڕەی داخڵبوون</title>
-  
+
   <link href="/assets/img/favicon.png" rel="icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
-  
+
   <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="/assets/css/style.css" rel="stylesheet">
@@ -70,35 +71,43 @@
   </main>
 
   <script>
-    const form = document.getElementById("loginForm");
+    // Simpler version - backend knows user type from username
 
-    form.addEventListener("submit", async (e) => {
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
 
       try {
-        const res = await fetch("/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
         });
 
-        const data = await res.json();
+        const data = await response.json();
 
-        if (res.ok) {
-          // ✅ Save token and user data to localStorage
+        if (response.ok) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('user', JSON.stringify(data.user));
-          window.location.href = "index.html";
+
+          // Redirect based on user type from backend
+          if (data.user.type === 'ئەدمین') {
+            window.location.href = 'index.html';
+          } else if (data.user.type === 'لاوەکی') {
+            window.location.href = 'watcher/index.html';
+          }
         } else {
-          alert("❌ " + data.message);
+          alert(data.message || 'ناو یان وشەی نهێنی هەڵەیە!');
         }
+
       } catch (error) {
-        alert("❌ Connection error: " + error.message);
+        console.error('Login error:', error);
+        alert('هەڵەیەک ڕوویدا!');
       }
     });
   </script>
 </body>
+
 </html>
