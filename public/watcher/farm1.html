@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>سەرژمێری هێلکە / فارمی 1</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- Receipt Styles -->
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">سەرژمێری هێلکە</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i> <span class="d-none d-md-block dropdown-toggle ps-2"
+              id="headerUsername">بەڵێن</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6 id="headerFullName">بەڵێن بەختیار</h6>
+              <span id="headerUserType">ئەدمین</span>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="logout()">
+                <i class="bi bi-box-arrow-left"></i>
+                <span>چوونە دەرەوە</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>داشبۆرد</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-house-door"></i><span>فارمەکان</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="farm1.html" class="active">
+              <i class="bi bi-circle"></i><span>فارمی یەکەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm2.html">
+              <i class="bi bi-circle"></i><span>فارمی دووەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm3.html">
+              <i class="bi bi-circle"></i><span>فارمی سێیەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm4.html">
+              <i class="bi bi-circle"></i><span>فارمی چوارەم</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-heading">بەشەکان</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="calculation.html">
+          <i class="bi bi-calculator"></i>
+          <span>سەرژمێری</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" onclick="alert('ئەم خزمەتگوزاریە جارێ بەردەست نییە!');">
+          <i class="bi bi-gear"></i>
+          <span>ڕێکخستن</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" onclick="logout()">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>چوونە دەرەوە</span>
+        </a>
+      </li><!-- End Login Page Nav -->
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>فارمی یەکەم</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">فارمی یەکەم</li>
+          <li class="breadcrumb-item">فارمەکان</li>
+          <li class="breadcrumb-item"><a href="index.html">داشبۆرد</a></li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section" hidden>
+      <div class="row" dir="rtl">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+
+              <h5 class="card-title">داخڵکردنی فارمی یەک</h5>
+              <form id="registerForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="eggsnumber" placeholder="" required>
+                      <label for="eggsnumber">عەدەدی هێلکە</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="flatofeggs" placeholder="" required>
+                      <label for="flatofeggs">عەدەدی تەبەق</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="eggspacket" placeholder="" required>
+                      <label for="eggspacket">عەدەدی کارتۆن</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-floating mb-3">
+                      <input type="date" class="form-control date" id="todayDate">
+                      <label for="todayDate">بەروار</label>
+                    </div>
+                  </div>
+
+                  <div class="text-right pt-3 pb-1 p-3">
+                    <button type="submit" class="btn btn-primary">داخڵکردن</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="section">
+      <div class="row" dir="rtl">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">خشتەی فارمی یەک</h5>
+
+              <div class="row">
+                <!-- Date Range Filter -->
+                <div class="col-md-3">
+                  <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="filterDateFrom">
+                    <label for="filterDateFrom">لە بەرواری</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="filterDateTo">
+                    <label for="filterDateTo">بۆ بەرواری</label>
+                  </div>
+                </div>
+
+                <!-- Quick Filters -->
+                <div class="col-md-3">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="filterQuick" onchange="applyQuickFilter()">
+                      <option value="">هەڵبژاردن</option>
+                      <option value="week">حەفتەی ڕابردوو (7 ڕۆژ)</option>
+                      <option value="month">مانگی ڕابردوو (30 ڕۆژ)</option>
+                      <option value="month1">مانگی یەکەم</option>
+                      <option value="month2">مانگی دووەم</option>
+                      <option value="month3">مانگی سێیەم</option>
+                      <option value="month4">مانگی چوارەم</option>
+                      <option value="month5">مانگی پێنجەم</option>
+                      <option value="month6">مانگی شەشەم</option>
+                      <option value="month7">مانگی حەوتەم</option>
+                      <option value="month8">مانگی هەشتەم</option>
+                      <option value="month9">مانگی نۆیەم</option>
+                      <option value="month10">مانگی دەیەم</option>
+                      <option value="month11">مانگی یازدەیەم</option>
+                      <option value="month12">مانگی دوانزەیەم</option>
+                    </select>
+                    <label for="filterQuick">فلتەری خێرا</label>
+                  </div>
+                </div>
+
+                <!-- Year for specific month -->
+                <div class="col-md-3">
+                  <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="filterYear" placeholder="2026" value="2026">
+                    <label for="filterYear">ساڵ</label>
+                  </div>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="col-md-12 text-center mb-3">
+                  <button class="btn btn-primary" onclick="applyFilter()">
+                    <i class="bi bi-funnel"></i> فلتەرکردن
+                  </button>
+                  <button class="btn btn-secondary" onclick="clearFilter()">
+                    <i class="bi bi-x-circle"></i> سڕینەوەی فلتەر
+                  </button>
+                </div>
+
+                <!-- Summary Statistics -->
+                <div class="col-md-12">
+                  <div class="alert alert-info" id="filterSummary" style="display: none;">
+                    <h6 class="alert-heading">کۆی گشتی:</h6>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <strong>کۆی هێلکە:</strong> <span id="totalEggs">0</span>
+                      </div>
+                      <div class="col-md-4">
+                        <strong>کۆی تەبەق:</strong> <span id="totalFlats">0</span>
+                      </div>
+                      <div class="col-md-4">
+                        <strong>کۆی کارتۆن:</strong> <span id="totalPackets">0</span>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-12">
+                        <strong>ژمارەی تۆمارەکان:</strong> <span id="totalRecords">0</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-body">
+
+                    <table class="table datatable table-farm ">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">هێلکە</th>
+                          <th scope="col">تەبەق</th>
+                          <th scope="col">کارتۆن</th>
+                          <th scope="col">بەرواری داخڵکردن</th>
+                          <th scope="col">بەرواری گۆڕین</th>
+                        </tr>
+                      </thead>
+                      <tbody id="farmTableBody">
+                        <tr>
+                          <td colspan="7" class="text-center">چاوەڕێی داتا...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Ballen Baxtyar</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://ballenio.vercel.app/">Ballen Baxtyar</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Hidden Receipt Container -->
+  <div id="receiptContainer"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Auth Script -->
+  <script src="assets/js/auth.js"></script>
+
+  <!-- Libraries for PDF generation from HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    // Load settings
+    const appSettings = window.getAppSettings ? window.getAppSettings() : {
+      calculation: { eggsPerFlat: 30, flatsPerPacket: 12 },
+      farms: { colors: {}, active: {} }
+    };
+
+    // Use dynamic calculation values
+    const EGGS_PER_FLAT = appSettings.calculation.eggsPerFlat;
+    const FLATS_PER_PACKET = appSettings.calculation.flatsPerPacket;
+    const EGGS_PER_PACKET = EGGS_PER_FLAT * FLATS_PER_PACKET;
+
+    // Apply farm colors
+    if (appSettings.farms.colors.farm1) {
+      const style = document.createElement('style');
+      style.textContent = `
+    .farm-1-row { background-color: ${appSettings.farms.colors.farm1} !important; }
+    .farm-2-row { background-color: ${appSettings.farms.colors.farm2} !important; }
+    .farm-3-row { background-color: ${appSettings.farms.colors.farm3} !important; }
+    .farm-4-row { background-color: ${appSettings.farms.colors.farm4} !important; }
+  `;
+      document.head.appendChild(style);
+    }
+    // Check authentication
+    const currentUser = checkAuth();
+    if (currentUser) {
+      document.getElementById('headerUsername').textContent = currentUser.firstname;
+      document.getElementById('headerFullName').textContent = `${currentUser.firstname} ${currentUser.lastname}`;
+      document.getElementById('headerUserType').textContent = currentUser.type;
+    }
+
+    // Set today's date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('todayDate').value = today;
+
+    // Load farm data on page load
+    loadFarmData();
+
+    let allRecords = []; // Store all records for filtering
+    let filteredRecords = []; // Store currently filtered records
+
+    // ========== LOAD FARM DATA ==========
+    async function loadFarmData() {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:3000/farm1', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          allRecords = data.records; // Store all records
+          filteredRecords = allRecords; // Initialize filtered records
+          displayFarmData(allRecords);
+        }
+      } catch (error) {
+        console.error('Error loading farm data:', error);
+      }
+    }
+
+    // ========== DISPLAY FARM DATA ==========
+    function displayFarmData(records) {
+      const tbody = document.getElementById('farmTableBody');
+
+      if (records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center">هیچ داتایەک نییە</td></tr>';
+        document.getElementById('filterSummary').style.display = 'none';
+        return;
+      }
+
+      tbody.innerHTML = records.map((record, index) => `
+        <tr>
+          <th scope="row">${index + 1}</th>
+          <td>${record.eggs}</td>
+          <td>${record.flats}</td>
+          <td>${record.packets}</td>
+          <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
+          <td>${record.updatedAt ? new Date(record.updatedAt).toLocaleDateString('en-GB') : '-'}</td>
+          </td>
+        </tr>
+      `).join('');
+
+      // Update summary
+      updateSummary(records);
+    }
+
+    // ========== UPDATE SUMMARY ==========
+    function updateSummary(records) {
+      const totalEggs = records.reduce((sum, r) => sum + r.eggs, 0);
+      const totalFlats = records.reduce((sum, r) => sum + r.flats, 0);
+      const totalPackets = records.reduce((sum, r) => sum + r.packets, 0);
+
+      document.getElementById('totalEggs').textContent = totalEggs.toLocaleString();
+      document.getElementById('totalFlats').textContent = totalFlats.toFixed(2);
+      document.getElementById('totalPackets').textContent = totalPackets.toFixed(2);
+      document.getElementById('totalRecords').textContent = records.length;
+      document.getElementById('filterSummary').style.display = 'block';
+    }
+
+    // ========== QUICK FILTER ==========
+    function applyQuickFilter() {
+      const quickFilter = document.getElementById('filterQuick').value;
+      const year = parseInt(document.getElementById('filterYear').value) || new Date().getFullYear();
+
+      if (!quickFilter) return;
+
+      const today = new Date();
+      let fromDate, toDate;
+
+      if (quickFilter === 'week') {
+        // Last 7 days
+        toDate = new Date();
+        fromDate = new Date();
+        fromDate.setDate(fromDate.getDate() - 7);
+      } else if (quickFilter === 'month') {
+        // Last 30 days
+        toDate = new Date();
+        fromDate = new Date();
+        fromDate.setDate(fromDate.getDate() - 30);
+      } else if (quickFilter.startsWith('month')) {
+        // Specific month
+        const monthNum = parseInt(quickFilter.replace('month', ''));
+        fromDate = new Date(year, monthNum - 1, 1);
+        toDate = new Date(year, monthNum, 0); // Last day of the month
+      }
+
+      if (fromDate && toDate) {
+        document.getElementById('filterDateFrom').value = fromDate.toISOString().split('T')[0];
+        document.getElementById('filterDateTo').value = toDate.toISOString().split('T')[0];
+        applyFilter();
+      }
+    }
+
+    // ========== APPLY FILTER ==========
+    function applyFilter() {
+      const dateFrom = document.getElementById('filterDateFrom').value;
+      const dateTo = document.getElementById('filterDateTo').value;
+
+      let filtered = allRecords;
+
+      if (dateFrom || dateTo) {
+        filtered = allRecords.filter(record => {
+          const recordDate = new Date(record.createdAt);
+          const from = dateFrom ? new Date(dateFrom) : new Date('1900-01-01');
+          const to = dateTo ? new Date(dateTo) : new Date('2100-12-31');
+
+          // Set time to end of day for 'to' date to include the full day
+          to.setHours(23, 59, 59, 999);
+
+          return recordDate >= from && recordDate <= to;
+        });
+      }
+
+      filteredRecords = filtered; // Update filtered records
+      displayFarmData(filtered);
+    }
+
+    // ========== CLEAR FILTER ==========
+    function clearFilter() {
+      document.getElementById('filterDateFrom').value = '';
+      document.getElementById('filterDateTo').value = '';
+      document.getElementById('filterQuick').value = '';
+      document.getElementById('filterYear').value = new Date().getFullYear();
+      filteredRecords = allRecords;
+      displayFarmData(allRecords);
+    }
+
+    // ========== OPEN UPDATE MODAL ==========
+    
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>سەرژمێری هێلکە - ڕێکخستن</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .settings-tabs {
+      margin-bottom: 20px;
+    }
+    
+    .tab-content-section {
+      display: none;
+    }
+    
+    .tab-content-section.active {
+      display: block;
+    }
+    
+    .color-preview {
+      width: 50px;
+      height: 30px;
+      border-radius: 5px;
+      border: 2px solid #ddd;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+    
+    .farm-status-toggle {
+      margin: 10px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #0d6efd;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .permission-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 10px 0;
+    }
+    
+    .permission-item {
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">سەرژمێری هێلکە</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i> <span class="d-none d-md-block dropdown-toggle ps-2" id="headerUsername">بەڵێن</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6 id="headerFullName">بەڵێن بەختیار</h6>
+              <span id="headerUserType">ئەدمین</span>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="logout()">
+                <i class="bi bi-box-arrow-left"></i>
+                <span>چوونە دەرەوە</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>داشبۆرد</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-house-door"></i><span>فارمەکان</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="farm1.html">
+              <i class="bi bi-circle"></i><span>فارمی یەکەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm2.html">
+              <i class="bi bi-circle"></i><span>فارمی دووەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm3.html">
+              <i class="bi bi-circle"></i><span>فارمی سێیەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm4.html">
+              <i class="bi bi-circle"></i><span>فارمی چوارەم</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-people"></i><span>بەکارهێنەرەکان</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="admin.html">
+              <i class="bi bi-circle"></i><span>ئەدمین</span>
+            </a>
+          </li>
+          <li>
+            <a href="watcher.html">
+              <i class="bi bi-circle"></i><span>لاوەکی</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-heading">بەشەکان</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="calculation.html">
+          <i class="bi bi-calculator"></i>
+          <span>سەرژمێری</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" onclick="alert('ئەم خزمەتگوزاریە جارێ بەردەست نییە!');">
+          <i class="bi bi-gear"></i>
+          <span>ڕێکخستن</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" onclick="logout()">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>چوونە دەرەوە</span>
+        </a>
+      </li><!-- End Login Page Nav -->
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>ڕێکخستن</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">ڕێکخستن</li>
+          <li class="breadcrumb-item"><a href="index.html">داشبۆرد</a></li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section" dir="rtl">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <!-- Settings Tabs -->
+          <div class="card">
+            <div class="card-body">
+              <ul class="nav nav-tabs nav-tabs-bordered settings-tabs" id="settingsTabs">
+                <li class="nav-item">
+                  <button class="nav-link active" onclick="showTab('calculation')">
+                    <i class="bi bi-calculator"></i> سەرژمێری
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onclick="showTab('farms')">
+                    <i class="bi bi-house-door"></i> فارمەکان
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onclick="showTab('datetime')">
+                    <i class="bi bi-calendar"></i> بەروار و کات
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onclick="showTab('company')">
+                    <i class="bi bi-building"></i> زانیاری کۆمپانیا
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onclick="showTab('profile')">
+                    <i class="bi bi-person"></i> پڕۆفایل
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onclick="showTab('data')">
+                    <i class="bi bi-database"></i> داتا
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onclick="showTab('security')">
+                    <i class="bi bi-shield"></i> پاراستن
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onclick="showTab('advanced')">
+                    <i class="bi bi-gear-wide-connected"></i> پێشکەوتوو
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tab 1: Calculation Settings -->
+          <div id="calculation" class="tab-content-section active">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">ڕێکخستنەکانی سەرژمێری</h5>
+
+                <form id="calculationForm">
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">هێلکە لە هەر تەبەقێک</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="eggsPerFlat" value="30" min="1">
+                      <small class="text-muted">بنەڕەت: 30 هێلکە</small>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">تەبەق لە هەر کارتۆنێک</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="flatsPerPacket" value="12" min="1">
+                      <small class="text-muted">بنەڕەت: 12 تەبەق</small>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">ژمارەی ئۆنکە (لە هەر کارتۆنێک)</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="eggsPerPacket" readonly>
+                      <small class="text-muted">خۆکارانە دەژمێردرێت</small>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="button" class="btn btn-primary" onclick="saveCalculationSettings()">
+                      <i class="bi bi-save"></i> پاشەکەوتکردن
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="resetCalculationSettings()">
+                      <i class="bi bi-arrow-clockwise"></i> گەڕانەوە بۆ بنەڕەت
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Farm Management -->
+          <div id="farms" class="tab-content-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">بەڕێوەبردنی فارمەکان</h5>
+
+                <!-- Farm Colors -->
+                <h6 class="mt-4">ڕەنگەکانی فارم</h6>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label">فارمی یەکەم</label>
+                    <div class="input-group">
+                      <input type="color" class="form-control form-control-color" id="farm1Color" value="#f8f9fa">
+                      <span class="input-group-text">
+                        <div class="color-preview" id="farm1Preview" style="background-color: #f8f9fa;"></div>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">فارمی دووەم</label>
+                    <div class="input-group">
+                      <input type="color" class="form-control form-control-color" id="farm2Color" value="#d1e7dd">
+                      <span class="input-group-text">
+                        <div class="color-preview" id="farm2Preview" style="background-color: #d1e7dd;"></div>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label">فارمی سێیەم</label>
+                    <div class="input-group">
+                      <input type="color" class="form-control form-control-color" id="farm3Color" value="#f8d7da">
+                      <span class="input-group-text">
+                        <div class="color-preview" id="farm3Preview" style="background-color: #f8d7da;"></div>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">فارمی چوارەم</label>
+                    <div class="input-group">
+                      <input type="color" class="form-control form-control-color" id="farm4Color" value="#cfe2ff">
+                      <span class="input-group-text">
+                        <div class="color-preview" id="farm4Preview" style="background-color: #cfe2ff;"></div>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Farm Status -->
+                <h6 class="mt-4">دۆخی فارمەکان (چالاک/ناچالاک)</h6>
+                <div class="farm-status-toggle">
+                  <div class="row align-items-center mb-2">
+                    <div class="col-8">
+                      <strong>فارمی یەکەم</strong>
+                    </div>
+                    <div class="col-4 text-end">
+                      <label class="switch">
+                        <input type="checkbox" id="farm1Active" checked>
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="farm-status-toggle">
+                  <div class="row align-items-center mb-2">
+                    <div class="col-8">
+                      <strong>فارمی دووەم</strong>
+                    </div>
+                    <div class="col-4 text-end">
+                      <label class="switch">
+                        <input type="checkbox" id="farm2Active" checked>
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="farm-status-toggle">
+                  <div class="row align-items-center mb-2">
+                    <div class="col-8">
+                      <strong>فارمی سێیەم</strong>
+                    </div>
+                    <div class="col-4 text-end">
+                      <label class="switch">
+                        <input type="checkbox" id="farm3Active" checked>
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="farm-status-toggle">
+                  <div class="row align-items-center mb-2">
+                    <div class="col-8">
+                      <strong>فارمی چوارەم</strong>
+                    </div>
+                    <div class="col-4 text-end">
+                      <label class="switch">
+                        <input type="checkbox" id="farm4Active" checked>
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-end mt-4">
+                  <button type="button" class="btn btn-primary" onclick="saveFarmSettings()">
+                    <i class="bi bi-save"></i> پاشەکەوتکردن
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Date & Time Settings -->
+          <div id="datetime" class="tab-content-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">ڕێکخستنەکانی بەروار و کات</h5>
+
+                <form>
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">شێوازی بەروار</label>
+                    <div class="col-sm-9">
+                      <select class="form-select" id="dateFormat">
+                        <option value="DD/MM/YYYY" selected>DD/MM/YYYY (ڕۆژ/مانگ/ساڵ)</option>
+                        <option value="MM/DD/YYYY">MM/DD/YYYY (مانگ/ڕۆژ/ساڵ)</option>
+                        <option value="YYYY-MM-DD">YYYY-MM-DD (ساڵ-مانگ-ڕۆژ)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">جۆری ڕۆژژمێر</label>
+                    <div class="col-sm-9">
+                      <select class="form-select" id="calendarType">
+                        <option value="gregorian" selected>میلادی (Gregorian)</option>
+                        <option value="kurdish">کوردی (Kurdish)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">دەستپێکی ساڵی دارایی</label>
+                    <div class="col-sm-9">
+                      <select class="form-select" id="fiscalYearStart">
+                        <option value="1">کانوونی دووەم (January)</option>
+                        <option value="2">شوبات (February)</option>
+                        <option value="3">ئازار (March)</option>
+                        <option value="4">نیسان (April)</option>
+                        <option value="5">ئایار (May)</option>
+                        <option value="6">حوزەیران (June)</option>
+                        <option value="7">تەمووز (July)</option>
+                        <option value="8">ئاب (August)</option>
+                        <option value="9">ئەیلوول (September)</option>
+                        <option value="10">تشرینی یەکەم (October)</option>
+                        <option value="11">تشرینی دووەم (November)</option>
+                        <option value="12">کانوونی یەکەم (December)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">بەرواری بنەڕەت لە داخڵکردن</label>
+                    <div class="col-sm-9">
+                      <select class="form-select" id="defaultEntryDate">
+                        <option value="today" selected>ئەمڕۆ</option>
+                        <option value="yesterday">دوێنێ</option>
+                        <option value="custom">دیاریکراو</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="button" class="btn btn-primary" onclick="saveDateTimeSettings()">
+                      <i class="bi bi-save"></i> پاشەکەوتکردن
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Company Information -->
+          <div id="company" class="tab-content-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">زانیاری کۆمپانیا</h5>
+
+                <form>
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">ناوی کۆمپانیا</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="companyName" value="سەرژمێری هێلکە">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">لۆگۆی کۆمپانیا</label>
+                    <div class="col-sm-9">
+                      <input type="file" class="form-control" id="companyLogo" accept="image/*">
+                      <small class="text-muted">پێشنیار: PNG یان JPG، کەمتر لە 2MB</small>
+                      <div id="logoPreview" class="mt-2"></div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">ناونیشان</label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control" id="companyAddress" rows="3"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">ژمارەی تەلەفۆن</label>
+                    <div class="col-sm-9">
+                      <input type="tel" class="form-control" id="companyPhone">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">ئیمەیڵ</label>
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" id="companyEmail">
+                    </div>
+                  </div>
+
+                  <h6 class="mt-4">ڕێکخستنەکانی وەسڵ</h6>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">خۆکارانە پاشەکەوتکردن</label>
+                    <div class="col-sm-9">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="autoSaveReceipts">
+                        <label class="form-check-label" for="autoSaveReceipts">
+                          وەسڵەکان خۆکارانە پاشەکەوت بکە
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">شوێنی فۆڵدەر</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="receiptFolder" placeholder="Downloads/Receipts">
+                      <small class="text-muted">فۆڵدەری بنەڕەت بۆ پاشەکەوتکردن</small>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="button" class="btn btn-primary" onclick="saveCompanySettings()">
+                      <i class="bi bi-save"></i> پاشەکەوتکردن
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 5: User Profile -->
+          <div id="profile" class="tab-content-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">پڕۆفایلی بەکارهێنەر</h5>
+
+                <form>
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">ناوی یەکەم</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="userFirstName">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">ناوی دووەم</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="userLastName">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">وێنەی پڕۆفایل</label>
+                    <div class="col-sm-9">
+                      <input type="file" class="form-control" id="profilePhoto" accept="image/*">
+                      <div id="profilePhotoPreview" class="mt-2"></div>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="button" class="btn btn-primary" onclick="saveProfileSettings()">
+                      <i class="bi bi-save"></i> پاشەکەوتکردن
+                    </button>
+                  </div>
+                </form>
+
+                <hr class="my-4">
+
+                <h6>گۆڕینی وشەی نهێنی</h6>
+                <form id="changePasswordForm">
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">وشەی نهێنی کۆن</label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="currentPassword">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">وشەی نهێنی نوێ</label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="newPassword">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">دووبارەکردنەوە</label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="confirmPassword">
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="button" class="btn btn-primary" onclick="changePassword()">
+                      <i class="bi bi-key"></i> گۆڕینی وشەی نهێنی
+                    </button>
+                  </div>
+                </form>
+
+                <hr class="my-4">
+
+                <h6>ڕێکخستنەکانی دانیشتن</h6>
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">خۆکارانە چوونەدەرەوە</label>
+                  <div class="col-sm-9">
+                    <select class="form-select" id="sessionTimeout">
+                      <option value="15">15 خولەک</option>
+                      <option value="30" selected>30 خولەک</option>
+                      <option value="60">1 کاتژمێر</option>
+                      <option value="120">2 کاتژمێر</option>
+                      <option value="0">هەرگیز</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">دڵنیاکردنەوەی دوو قات (2FA)</label>
+                  <div class="col-sm-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="enable2FA">
+                      <label class="form-check-label" for="enable2FA">
+                        چالاککردنی دڵنیاکردنەوەی دوو قات
+                      </label>
+                    </div>
+                    <small class="text-muted">پێویستی بە ئەپی Google Authenticator هەیە</small>
+                  </div>
+                </div>
+
+                <div class="text-end">
+                  <button type="button" class="btn btn-primary" onclick="saveSecuritySettings()">
+                    <i class="bi bi-save"></i> پاشەکەوتکردن
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 6: Data Management -->
+          <div id="data" class="tab-content-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">بەڕێوەبردنی داتا</h5>
+
+                <h6>هاوردەکردن و هەناردەکردن</h6>
+
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-success w-100" onclick="exportAllData()">
+                      <i class="bi bi-download"></i> هەناردەکردنی هەموو داتا (CSV)
+                    </button>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-info w-100" onclick="backupDatabase()">
+                      <i class="bi bi-archive"></i> پاشگر دروستکردن
+                    </button>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-warning w-100" onclick="document.getElementById('importFile').click()">
+                      <i class="bi bi-upload"></i> هاوردەکردنی داتا
+                    </button>
+                    <input type="file" id="importFile" accept=".csv,.xlsx" style="display:none;" onchange="importData(this)">
+                  </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h6>پاشگری خۆکار</h6>
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">چالاککردن</label>
+                  <div class="col-sm-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="autoBackup">
+                      <label class="form-check-label" for="autoBackup">
+                        پاشگری خۆکار چالاک بکە
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">ماوە</label>
+                  <div class="col-sm-9">
+                    <select class="form-select" id="backupFrequency">
+                      <option value="daily" selected>ڕۆژانە</option>
+                      <option value="weekly">هەفتانە</option>
+                      <option value="monthly">مانگانە</option>
+                    </select>
+                  </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h6>پاراستنی داتا</h6>
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">مانەوەی داتا</label>
+                  <div class="col-sm-9">
+                    <select class="form-select" id="dataRetention">
+                      <option value="6">6 مانگ</option>
+                      <option value="12" selected>1 ساڵ</option>
+                      <option value="24">2 ساڵ</option>
+                      <option value="36">3 ساڵ</option>
+                      <option value="0">هەرگیز مەسڕەوە</option>
+                    </select>
+                    <small class="text-muted">داتای کۆن خۆکارانە ئەرشیف دەکرێت</small>
+                  </div>
+                </div>
+
+                <div class="text-end">
+                  <button type="button" class="btn btn-primary" onclick="saveDataSettings()">
+                    <i class="bi bi-save"></i> پاشەکەوتکردن
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 7: Security & Privacy -->
+          <div id="security" class="tab-content-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">پاراستن و تایبەتمەندی</h5>
+
+                <h6>مۆڵەتەکانی بەکارهێنەر</h6>
+                
+                <div class="alert alert-info">
+                  <strong>ئەدمین:</strong> دەتوانێت هەموو کارێک بکات<br>
+                  <strong>لاوەکی:</strong> تەنها دەتوانێت داتا ببینێت
+                </div>
+
+                <h6 class="mt-3">مۆڵەتەکانی لاوەکی</h6>
+                <div class="permission-grid">
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="watcherCanCreate">
+                      <label class="form-check-label" for="watcherCanCreate">
+                        دروستکردنی تۆمار
+                      </label>
+                    </div>
+                  </div>
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="watcherCanEdit">
+                      <label class="form-check-label" for="watcherCanEdit">
+                        دەستکاریکردنی تۆمار
+                      </label>
+                    </div>
+                  </div>
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="watcherCanDelete">
+                      <label class="form-check-label" for="watcherCanDelete">
+                        سڕینەوەی تۆمار
+                      </label>
+                    </div>
+                  </div>
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="watcherCanExport" checked>
+                      <label class="form-check-label" for="watcherCanExport">
+                        هەناردەکردنی داتا
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <h6 class="mt-4">دەستگەیشتن بە فارمەکان</h6>
+                <div class="permission-grid">
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="farm1Access" checked>
+                      <label class="form-check-label" for="farm1Access">
+                        فارمی یەکەم
+                      </label>
+                    </div>
+                  </div>
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="farm2Access" checked>
+                      <label class="form-check-label" for="farm2Access">
+                        فارمی دووەم
+                      </label>
+                    </div>
+                  </div>
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="farm3Access" checked>
+                      <label class="form-check-label" for="farm3Access">
+                        فارمی سێیەم
+                      </label>
+                    </div>
+                  </div>
+                  <div class="permission-item">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="farm4Access" checked>
+                      <label class="form-check-label" for="farm4Access">
+                        فارمی چوارەم
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h6>تۆماری وردەکاری (Audit Log)</h6>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="enableAuditLog" checked>
+                  <label class="form-check-label" for="enableAuditLog">
+                    چالاککردنی تۆماری وردەکاری
+                  </label>
+                </div>
+
+                <button type="button" class="btn btn-secondary" onclick="viewAuditLog()">
+                  <i class="bi bi-list-ul"></i> بینینی تۆماری وردەکاری
+                </button>
+
+                <div class="text-end mt-3">
+                  <button type="button" class="btn btn-primary" onclick="savePermissionSettings()">
+                    <i class="bi bi-save"></i> پاشەکەوتکردن
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 8: Advanced Settings -->
+          <div id="advanced" class="tab-content-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">ڕێکخستنە پێشکەوتووەکان</h5>
+
+                <h6>ڕێکخستنەکانی چاپکردن</h6>
+
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">چاپکەری بنەڕەت</label>
+                  <div class="col-sm-9">
+                    <select class="form-select" id="defaultPrinter">
+                      <option value="system">چاپکەری سیستەم</option>
+                      <option value="pdf">PDF</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">شێوازی چاپ</label>
+                  <div class="col-sm-9">
+                    <select class="form-select" id="printFormat">
+                      <option value="a4" selected>A4</option>
+                      <option value="letter">Letter</option>
+                      <option value="thermal">Thermal (80mm)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">خۆکارانە چاپکردن</label>
+                  <div class="col-sm-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="autoPrint">
+                      <label class="form-check-label" for="autoPrint">
+                        وەسڵەکان خۆکارانە چاپ بکە
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h6 class="text-danger">ناوچەی مەترسی</h6>
+                
+                <div class="alert alert-danger">
+                  <i class="bi bi-exclamation-triangle"></i> 
+                  <strong>ئاگاداری!</strong> ئەم کارانە دەتوانن داتاکان بسڕنەوە
+                </div>
+
+                <button type="button" class="btn btn-warning" onclick="resetAllSettings()">
+                  <i class="bi bi-arrow-counterclockwise"></i> گەڕانەوەی هەموو ڕێکخستنەکان
+                </button>
+
+                <button type="button" class="btn btn-danger" onclick="deleteAllData()">
+                  <i class="bi bi-trash"></i> سڕینەوەی هەموو داتاکان
+                </button>
+
+                <div class="text-end mt-4">
+                  <button type="button" class="btn btn-primary" onclick="saveAdvancedSettings()">
+                    <i class="bi bi-save"></i> پاشەکەوتکردن
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Ballen Baxtyar</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://ballenio.vercel.app/">Ballen Baxtyar</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Auth Script -->
+  <script src="assets/js/auth.js"></script>
+
+  <script src="assets/js/settings.js"></script>
+
+</body>
+
+</html>

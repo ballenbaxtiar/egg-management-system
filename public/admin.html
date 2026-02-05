@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>سەرژمێری هێلکە</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">سەرژمێری هێلکە</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i> <span class="d-none d-md-block dropdown-toggle ps-2" id="headerUsername">بەڵێن</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6 id="headerFullName">بەڵێن بەختیار</h6>
+              <span id="headerUserType">ئەدمین</span>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="logout()">
+                <i class="bi bi-box-arrow-left"></i>
+                <span>چوونە دەرەوە</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>داشبۆرد</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-house-door"></i><span>فارمەکان</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="farm1.html">
+              <i class="bi bi-circle"></i><span>فارمی یەکەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm2.html">
+              <i class="bi bi-circle"></i><span>فارمی دووەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm3.html">
+              <i class="bi bi-circle"></i><span>فارمی سێیەم</span>
+            </a>
+          </li>
+          <li>
+            <a href="farm4.html">
+              <i class="bi bi-circle"></i><span>فارمی چوارەم</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-people"></i><span>بەکارهێنەرەکان</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content  " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="admin.html" class="active">
+              <i class="bi bi-circle"></i><span>ئەدمین</span>
+            </a>
+          </li>
+          <li>
+            <a href="watcher.html">
+              <i class="bi bi-circle"></i><span>لاوەکی</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-heading">بەشەکان</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="calculation.html">
+          <i class="bi bi-calculator"></i>
+          <span>سەرژمێری</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" onclick="alert('ئەم خزمەتگوزاریە جارێ بەردەست نییە!');">
+          <i class="bi bi-gear"></i>
+          <span>ڕێکخستن</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" onclick="logout()">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>چوونە دەرەوە</span>
+        </a>
+      </li><!-- End Login Page Nav -->
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>بەکارهێنەرەکان</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">ئەدمین</li>
+          <li class="breadcrumb-item">بەکارهێنەرەکان</li>
+          <li class="breadcrumb-item"><a href="index.html">داشبۆرد</a></li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row" dir="rtl">
+
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">داخڵکردنی ئەدمین</h5>
+
+              <!-- Advanced Form Elements -->
+              <form id="registerForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="firstname" placeholder="" required>
+                      <label for="firstname">ناوی یەکەم</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="lastname" placeholder="" required>
+                      <label for="lastname">ناوی دووەم</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="username" placeholder="" required>
+                      <label for="username">ناو <code>Username</code></label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="password" placeholder="" required>
+                      <label for="password">وشەی نهێنی</label>
+                    </div>
+                  </div>
+                  <div class="text-right pt-3 pb-1 p-3">
+                    <button type="submit" class="btn btn-primary">داخڵکردن</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="row" dir="rtl">
+
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">خشتەی ئەدمین</h5>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ناو</th>
+                    <th scope="col">ناو <code>Username</code></th>
+                    <th scope="col">وشەی نهێنی</th>
+                    <th scope="col">کردارەکان</th>
+                  </tr>
+                </thead>
+                <tbody id="adminTableBody">
+                  <tr>
+                    <td colspan="5" class="text-center">چاوەڕێی داتا...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Ballen Baxtyar</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://ballenio.vercel.app/">Ballen Baxtyar</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Auth Script -->
+  <script src="assets/js/auth.js"></script>
+
+  <script>
+    // Check authentication on page load
+    const currentUser = checkAuth();
+    if (currentUser) {
+      document.getElementById('headerUsername').textContent = currentUser.firstname;
+      document.getElementById('headerFullName').textContent = `${currentUser.firstname} ${currentUser.lastname}`;
+      document.getElementById('headerUserType').textContent = currentUser.type;
+    }
+
+    // Load admins when page loads
+    loadAdmins();
+
+    // Register form submission
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const firstname = document.getElementById('firstname').value;
+      const lastname = document.getElementById('lastname').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const type = "ئەدمین"; // Automatically set type as admin
+
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:3000/register', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ firstname, lastname, username, password, type })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert('✅ ' + data.message);
+          // Clear form
+          document.getElementById('registerForm').reset();
+          // Reload admin list
+          loadAdmins();
+        } else {
+          alert('❌ ' + data.message);
+        }
+      } catch (error) {
+        alert('❌ هەڵەیەک ڕوویدا: ' + error.message);
+      }
+    });
+
+    // Load all admins
+    async function loadAdmins() {
+      try {
+        const token = localStorage.getItem('token');
+        console.log('🔄 Loading admins...');
+        console.log('Token:', token ? 'exists' : 'missing');
+        
+        const res = await fetch('http://localhost:3000/users/admin', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        console.log('Response status:', res.status);
+        console.log('Response URL:', res.url);
+        
+        // Check if response is JSON
+        const contentType = res.headers.get('content-type');
+        console.log('Content-Type:', contentType);
+        
+        if (!contentType || !contentType.includes('application/json')) {
+          const text = await res.text();
+          console.error('Non-JSON response:', text);
+          throw new Error('Server returned non-JSON response');
+        }
+        
+        const data = await res.json();
+        console.log('Response data:', data);
+
+        if (res.ok) {
+          displayAdmins(data.users || []);
+        } else {
+          console.error('Failed to load admins:', data);
+          alert('❌ نەتوانرا داتا بهێندرێتەوە: ' + (data.message || 'Unknown error'));
+        }
+      } catch (error) {
+        console.error('Error loading admins:', error);
+        const tbody = document.getElementById('adminTableBody');
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center text-danger">هەڵە لە هێنانەوەی داتا: ' + error.message + '</td></tr>';
+      }
+    }
+
+    // Display admins in table
+    function displayAdmins(admins) {
+      const tbody = document.getElementById('adminTableBody');
+      
+      if (admins.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center">هیچ ئەدمینێک نییە</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = admins.map((admin, index) => `
+        <tr>
+          <th scope="row">${index + 1}</th>
+          <td>${admin.firstname} ${admin.lastname}</td>
+          <td>${admin.username}</td>
+          <td>${admin.password}</td>
+          <td>
+            <button class="btn btn-danger btn-sm table-btn" onclick="deleteAdmin('${admin.username}') table-btn">
+              <i class="bi bi-trash"></i> سڕینەوە
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Delete admin
+    async function deleteAdmin(username) {
+      if (!confirm('دڵنیایت لە سڕینەوەی ئەم ئەدمینە؟')) {
+        return;
+      }
+
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`http://localhost:3000/users/${username}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert('✅ ئەدمین سڕایەوە');
+          loadAdmins();
+        } else {
+          alert('❌ ' + data.message);
+        }
+      } catch (error) {
+        alert('❌ هەڵەیەک ڕوویدا: ' + error.message);
+      }
+    }
+  </script>
+
+</body>
+
+</html>
