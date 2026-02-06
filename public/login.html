@@ -79,7 +79,7 @@
       const password = document.getElementById("password").value;
 
       try {
-        const res = await fetch("http://localhost:3000/login", {
+        const res = await fetch("/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password })
@@ -104,44 +104,6 @@
       }
     });
   </script>
-  <!-- <script>
-    // Simpler version - backend knows user type from username
-
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      try {
-        const response = await fetch('http://localhost:3000/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', JSON.stringify(data.user));
-
-          // Redirect based on user type from backend
-          if (data.user.type === 'ئەدمین') {
-            window.location.href = 'index.html';
-          } else if (data.user.type === 'لاوەکی') {
-            window.location.href = 'watcher/index.html';
-          }
-        } else {
-          alert(data.message || 'ناو یان وشەی نهێنی هەڵەیە!');
-        }
-
-      } catch (error) {
-        console.error('Login error:', error);
-        alert('هەڵەیەک ڕوویدا!');
-      }
-    });
-  </script> -->
 </body>
 
 </html>
