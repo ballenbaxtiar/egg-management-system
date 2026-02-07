@@ -31,553 +31,6 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <style>
-    .farm-1-row {
-      background-color: #f8f9fa !important;
-    }
-
-    .farm-2-row {
-      background-color: #d1e7dd !important;
-    }
-
-    .farm-3-row {
-      background-color: #f8d7da !important;
-    }
-
-    .farm-4-row {
-      background-color: #cfe2ff !important;
-    }
-
-    .total-row {
-      background-color: #fff3cd !important;
-      font-weight: bold;
-    }
-
-    /* Pagination Styles */
-    .pagination-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding: 15px;
-      background: #f8f9fa;
-      border-radius: 8px;
-    }
-
-    .pagination-info {
-      color: #666;
-      font-size: 14px;
-    }
-
-    .pagination-controls {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .pagination-controls button {
-      padding: 8px 16px;
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .pagination-controls button:hover:not(:disabled) {
-      background: #667eea;
-      color: white;
-      border-color: #667eea;
-    }
-
-    .pagination-controls button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .pagination-controls .page-number {
-      padding: 8px 12px;
-      background: #667eea;
-      color: white;
-      border-radius: 5px;
-      font-weight: 600;
-    }
-
-    .page-size-selector {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .page-size-selector select {
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    /* Receipt Styles */
-
-    #receiptContainer {
-      position: fixed;
-      left: -9999px;
-      top: 0;
-      width: 210mm;
-      min-height: 297mm;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      padding: 0;
-      font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      direction: rtl;
-    }
-
-    .receipt-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 40px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .receipt-header h1 {
-      font-size: 42px;
-      font-weight: 900;
-      margin: 0 0 10px 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .receipt-header h2 {
-      font-size: 20px;
-      font-weight: 400;
-      margin: 0;
-      opacity: 0.95;
-    }
-
-    .receipt-body {
-      padding: 30px 40px;
-    }
-
-    .info-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .info-card {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-      border-right: 5px solid #667eea;
-    }
-
-    .info-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #2d3748;
-      margin: 0 0 15px 0;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #e2e8f0;
-    }
-
-    .info-card p {
-      margin: 8px 0;
-      color: #4a5568;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .info-card strong {
-      color: #2d3748;
-      font-weight: 600;
-    }
-
-    .summary-section {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .summary-title {
-      text-align: center;
-      font-size: 26px;
-      font-weight: 800;
-      color: #2d3748;
-      margin: 0 0 25px 0;
-      padding-bottom: 15px;
-      border-bottom: 3px solid #667eea;
-    }
-
-    .summary-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .summary-card {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-      transition: transform 0.3s;
-    }
-
-    .summary-card:nth-child(2) {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
-    }
-
-    .summary-card:nth-child(3) {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
-    }
-
-    .summary-card h4 {
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0 0 12px 0;
-      opacity: 0.95;
-    }
-
-    .summary-card .value {
-      font-size: 32px;
-      font-weight: 900;
-      margin: 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .table-section {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
-    }
-
-    .table-title {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 700;
-      color: #2d3748;
-      margin: 0 0 20px 0;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #e2e8f0;
-    }
-
-    .receipt-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .receipt-table thead {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-
-    .receipt-table th {
-      padding: 15px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .receipt-table th:first-child {
-      border-radius: 10px 0 0 0;
-    }
-
-    .receipt-table th:last-child {
-      border-radius: 0 10px 0 0;
-    }
-
-    .receipt-table td {
-      padding: 12px;
-      text-align: center;
-      border-bottom: 1px solid #e2e8f0;
-      color: #4a5568;
-      font-size: 13px;
-    }
-
-    .receipt-table tbody tr:nth-child(even) {
-      background-color: #f7fafc;
-    }
-
-    .receipt-table tbody tr:hover {
-      background-color: #edf2f7;
-    }
-
-    .receipt-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .receipt-footer {
-      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-      padding: 25px 40px;
-      color: white;
-      text-align: center;
-    }
-
-    .footer-line {
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #667eea, transparent);
-      margin-bottom: 15px;
-    }
-
-    .receipt-footer p {
-      margin: 8px 0;
-      font-size: 12px;
-      opacity: 0.9;
-    }
-
-    .receipt-footer .copyright {
-      font-weight: 700;
-      font-size: 13px;
-      margin-top: 12px;
-    }
-
-    .watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      font-size: 120px;
-      font-weight: 900;
-      color: rgba(102, 126, 234, 0.03);
-      z-index: 0;
-      pointer-events: none;
-    }
-  @media (max-width: 767px) {
-      /* Mobile styles */
-      
-      /* Pagination Container - Stack vertically on mobile */
-      .pagination-container {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 15px;
-        padding: 12px;
-        background: #f8f9fa;
-        border-radius: 8px;
-      }
-
-      /* Page Size Selector - First row */
-      .page-size-selector {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        font-size: 11px;
-        flex-wrap: wrap;
-        order: 1;
-      }
-
-      .page-size-selector label {
-        font-size: 11px;
-      }
-
-      .page-size-selector select {
-        padding: 6px 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 11px;
-      }
-
-      /* Pagination Info - Second row */
-      .pagination-info {
-        color: #666;
-        font-size: 10px;
-        text-align: center;
-        order: 2;
-      }
-
-      /* Pagination Controls - Third row */
-      .pagination-controls {
-        display: flex;
-        gap: 5px;
-        align-items: center;
-        justify-content: center;
-        order: 3;
-      }
-
-      .pagination-controls button {
-        padding: 6px 10px;
-        border: 1px solid #ddd;
-        background: white;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-size: 11px;
-        min-width: 35px;
-      }
-
-      .pagination-controls button i {
-        font-size: 12px;
-      }
-
-      .pagination-controls button:hover:not(:disabled) {
-        background: #667eea;
-        color: white;
-        border-color: #667eea;
-      }
-
-      .pagination-controls button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      .pagination-controls .page-number {
-        padding: 6px 10px;
-        background: #667eea;
-        color: white;
-        border-radius: 5px;
-        font-weight: 600;
-        font-size: 10px;
-        white-space: nowrap;
-      }
-
-      /* Table adjustments for mobile */
-      .table-responsive {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .table {
-        font-size: 11px;
-        min-width: 600px;
-      }
-
-      .table thead th {
-        padding: 8px 4px;
-        font-size: 10px;
-      }
-
-      .table tbody td {
-        padding: 8px 4px;
-        font-size: 10px;
-      }
-
-      /* Card adjustments */
-      .card {
-        margin-bottom: 15px;
-      }
-
-      .card-body {
-        padding: 15px !important;
-      }
-
-      .card-title {
-        font-size: 13px !important;
-      }
-
-      .card-icon {
-        width: 50px !important;
-        height: 50px !important;
-      }
-
-      .card-icon i {
-        font-size: 20px !important;
-      }
-
-      /* Filter section adjustments */
-      .form-floating {
-        margin-bottom: 10px;
-      }
-
-      .form-floating label {
-        font-size: 12px;
-      }
-
-      .form-control, .form-select {
-        font-size: 12px;
-        padding: 10px;
-      }
-
-      /* Button adjustments */
-      .btn {
-        font-size: 11px;
-        padding: 8px 12px;
-        margin: 3px;
-      }
-
-      .btn i {
-        font-size: 12px;
-      }
-
-      /* Header adjustments */
-      .pagetitle h1 {
-        font-size: 20px;
-      }
-
-      .breadcrumb {
-        font-size: 11px;
-      }
-
-      /* Individual farm summaries */
-      .col-lg-3 {
-        margin-bottom: 15px;
-      }
-
-      /* Hide some text on very small screens */
-      .page-size-selector span:first-of-type {
-        display: none;
-      }
-
-      .page-size-selector span:last-of-type {
-        font-size: 10px;
-      }
-    }
-
-    /* Extra small phones */
-    @media (max-width: 480px) {
-      .pagination-controls button {
-        padding: 5px 8px;
-        min-width: 30px;
-      }
-
-      .pagination-controls .page-number {
-        padding: 5px 8px;
-        font-size: 9px;
-      }
-
-      .pagination-info {
-        font-size: 9px;
-      }
-
-      .page-size-selector {
-        font-size: 10px;
-      }
-
-      .page-size-selector select {
-        font-size: 10px;
-        padding: 5px 8px;
-      }
-
-      /* Stack filter buttons vertically */
-      .text-center.mb-3 {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .text-center.mb-3 .btn {
-        width: 100%;
-      }
-
-      /* Smaller cards */
-      .card-body h6 {
-        font-size: 18px !important;
-      }
-
-      .card-body .text-muted {
-        font-size: 10px !important;
-      }
-    }
   </style>
 </head>
 
@@ -696,8 +149,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" onclick="alert('ئەم خزمەتگوزاریە جارێ بەردەست نییە!');"
-        >
+        <a class="nav-link collapsed" href="settings.html">
           <i class="bi bi-gear"></i>
           <span>ڕێکخستن</span>
         </a>
@@ -926,25 +378,27 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">فارم</th>
-                      <th scope="col">هێلکە</th>
-                      <th scope="col">تەبەق</th>
                       <th scope="col">کارتۆن</th>
+                      <th scope="col">تەبەق</th>
+                      <th scope="col">هێلکە</th>
+                      <th scope="col">کۆی گشتی</th>
                       <th scope="col">بەرواری داخڵکردن</th>
                       <th scope="col">بەرواری گۆڕین</th>
                     </tr>
                   </thead>
                   <tbody id="calculationTableBody">
                     <tr>
-                      <td colspan="7" class="text-center">چاوەڕێی داتا...</td>
+                      <td colspan="8" class="text-center">چاوەڕێی داتا...</td>
                     </tr>
                   </tbody>
                   <tfoot id="calculationTableFooter" style="display: none;">
                     <tr class="total-row table-dark">
                       <td colspan="2"><strong>کۆی گشتی</strong></td>
-                      <td><strong id="footerTotalEggs">0</strong></td>
-                      <td><strong id="footerTotalFlats">0</strong></td>
                       <td><strong id="footerTotalPackets">0</strong></td>
-                      <td colspan="2"><strong id="footerTotalRecords">0 تۆمار</strong></td>
+                      <td><strong id="footerTotalFlats">0</strong></td>
+                      <td><strong id="footerTotalEggsIndividual">0</strong></td>
+                      <td><strong id="footerTotalEggs">0</strong> هێلکە </td>
+                      <td colspan="2"><strong id="footerTotalRecords">0</strong> تۆمار </td>
                     </tr>
                   </tfoot>
                 </table>
@@ -1121,7 +575,7 @@
         const token = localStorage.getItem('token');
 
         const promises = [1, 2, 3, 4].map(farmNum =>
-          fetch(`/farm${farmNum}`, {
+          fetch(`http://localhost:3000/farm${farmNum}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           }).then(res => res.json())
         );
@@ -1154,13 +608,13 @@
       }
     }
 
-    // Display records in table with pagination
+    // ✅ UPDATED: Display records with totalEggs
     function displayRecords(records) {
       const tbody = document.getElementById('calculationTableBody');
       const tfoot = document.getElementById('calculationTableFooter');
 
       if (records.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center">هیچ داتایەک نییە</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center">هیچ داتایەک نییە</td></tr>';
         tfoot.style.display = 'none';
         updatePaginationInfo(0, 0, 0);
         return;
@@ -1176,23 +630,26 @@
         <tr class="farm-${record.farmNumber}-row">
           <td>${startIndex + index + 1}</td>
           <td><strong>${record.farmName}</strong></td>
-          <td>${record.eggs.toLocaleString()}</td>
-          <td>${record.flats.toFixed(2)}</td>
-          <td>${record.packets.toFixed(2)}</td>
+          <td>${(record.packets || 0).toLocaleString()}</td>
+          <td>${(record.flats || 0).toLocaleString()}</td>
+          <td>${(record.eggs || 0).toLocaleString()}</td>
+          <td><strong style="color: #0d6efd;">${(record.totalEggs || 0).toLocaleString()}</strong></td>
           <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
           <td>${record.updatedAt ? new Date(record.updatedAt).toLocaleDateString('en-GB') : '-'}</td>
         </tr>
       `).join('');
 
-      // Update footer totals (for ALL filtered records, not just current page)
-      const totalEggs = records.reduce((sum, r) => sum + r.eggs, 0);
-      const totalFlats = records.reduce((sum, r) => sum + r.flats, 0);
-      const totalPackets = records.reduce((sum, r) => sum + r.packets, 0);
+      // ✅ UPDATED: Footer totals using totalEggs
+      const totalPackets = records.reduce((sum, r) => sum + (r.packets || 0), 0);
+      const totalFlats = records.reduce((sum, r) => sum + (r.flats || 0), 0);
+      const totalEggsIndividual = records.reduce((sum, r) => sum + (r.eggs || 0), 0);
+      const totalEggs = records.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
+      document.getElementById('footerTotalPackets').textContent = totalPackets.toLocaleString();
+      document.getElementById('footerTotalFlats').textContent = totalFlats.toLocaleString();
+      document.getElementById('footerTotalEggsIndividual').textContent = totalEggsIndividual.toLocaleString();
       document.getElementById('footerTotalEggs').textContent = totalEggs.toLocaleString();
-      document.getElementById('footerTotalFlats').textContent = totalFlats.toFixed(2);
-      document.getElementById('footerTotalPackets').textContent = totalPackets.toFixed(2);
-      document.getElementById('footerTotalRecords').textContent = `${records.length} تۆمار`;
+      document.getElementById('footerTotalRecords').textContent = `${records.length}`;
       tfoot.style.display = 'table-footer-group';
 
       // Update pagination info
@@ -1245,29 +702,29 @@
       displayRecords(filteredRecords);
     }
 
-    // Update summary cards
+    // ✅ UPDATED: Summary cards using totalEggs
     function updateSummaryCards(records) {
-      const totalEggs = records.reduce((sum, r) => sum + r.eggs, 0);
-      const totalFlats = records.reduce((sum, r) => sum + r.flats, 0);
-      const totalPackets = records.reduce((sum, r) => sum + r.packets, 0);
+      const totalEggs = records.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
+      const totalFlats = records.reduce((sum, r) => sum + (r.flats || 0), 0);
+      const totalPackets = records.reduce((sum, r) => sum + (r.packets || 0), 0);
 
       document.getElementById('totalEggsCard').textContent = totalEggs.toLocaleString();
-      document.getElementById('totalFlatsCard').textContent = totalFlats.toFixed(2);
-      document.getElementById('totalPacketsCard').textContent = totalPackets.toFixed(2);
+      document.getElementById('totalFlatsCard').textContent = totalFlats.toLocaleString();
+      document.getElementById('totalPacketsCard').textContent = totalPackets.toLocaleString();
       document.getElementById('totalRecordsCard').textContent = records.length;
     }
 
-    // Update individual farm summaries
+    // ✅ UPDATED: Farm summaries using totalEggs
     function updateFarmSummaries(records) {
       for (let i = 1; i <= 4; i++) {
         const farmRecords = records.filter(r => r.farmNumber === i);
-        const totalEggs = farmRecords.reduce((sum, r) => sum + r.eggs, 0);
-        const totalFlats = farmRecords.reduce((sum, r) => sum + r.flats, 0);
-        const totalPackets = farmRecords.reduce((sum, r) => sum + r.packets, 0);
+        const totalEggs = farmRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
+        const totalFlats = farmRecords.reduce((sum, r) => sum + (r.flats || 0), 0);
+        const totalPackets = farmRecords.reduce((sum, r) => sum + (r.packets || 0), 0);
 
         document.getElementById(`farm${i}Eggs`).textContent = totalEggs.toLocaleString();
-        document.getElementById(`farm${i}Flats`).textContent = totalFlats.toFixed(2);
-        document.getElementById(`farm${i}Packets`).textContent = totalPackets.toFixed(2);
+        document.getElementById(`farm${i}Flats`).textContent = totalFlats.toLocaleString();
+        document.getElementById(`farm${i}Packets`).textContent = totalPackets.toLocaleString();
         document.getElementById(`farm${i}Records`).textContent = farmRecords.length;
       }
     }
@@ -1331,9 +788,9 @@
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
       if (searchTerm) {
         filtered = filtered.filter(r =>
-          r.eggs.toString().includes(searchTerm) ||
-          r.flats.toString().includes(searchTerm) ||
-          r.packets.toString().includes(searchTerm) ||
+          (r.totalEggs || 0).toString().includes(searchTerm) ||
+          (r.flats || 0).toString().includes(searchTerm) ||
+          (r.packets || 0).toString().includes(searchTerm) ||
           r.farmName.includes(searchTerm)
         );
       }
@@ -1348,7 +805,7 @@
       updateSummaryCards(filtered);
     }
 
-    // Sort records
+    // ✅ UPDATED: Sort by totalEggs
     function sortRecords(records, sortBy) {
       const sorted = [...records];
 
@@ -1358,9 +815,9 @@
         case 'date-asc':
           return sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
         case 'eggs-desc':
-          return sorted.sort((a, b) => b.eggs - a.eggs);
+          return sorted.sort((a, b) => (b.totalEggs || 0) - (a.totalEggs || 0));
         case 'eggs-asc':
-          return sorted.sort((a, b) => a.eggs - b.eggs);
+          return sorted.sort((a, b) => (a.totalEggs || 0) - (b.totalEggs || 0));
         case 'farm-asc':
           return sorted.sort((a, b) => a.farmNumber - b.farmNumber);
         default:
@@ -1384,7 +841,7 @@
       updateSummaryCards(filteredRecords);
     }
 
-    // Generate Receipt
+    // ✅ UPDATED: Generate Receipt with totalEggs
     async function generateReceipt() {
       if (filteredRecords.length === 0) {
         alert('❌ هیچ داتایەک بۆ دروستکردنی وەسڵ نییە');
@@ -1397,10 +854,10 @@
       loadingMsg.innerHTML = '<div style="font-size:20px;font-weight:bold;color:#667eea;margin-bottom:10px;">چاوەڕێبە...</div><div style="color:#666;">وەسڵەکە دروست دەکرێت</div>';
       document.body.appendChild(loadingMsg);
 
-      // Calculate totals
-      const totalEggs = filteredRecords.reduce((sum, r) => sum + r.eggs, 0);
-      const totalFlats = filteredRecords.reduce((sum, r) => sum + r.flats, 0);
-      const totalPackets = filteredRecords.reduce((sum, r) => sum + r.packets, 0);
+      // Calculate totals using totalEggs
+      const totalEggs = filteredRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
+      const totalFlats = filteredRecords.reduce((sum, r) => sum + (r.flats || 0), 0);
+      const totalPackets = filteredRecords.reduce((sum, r) => sum + (r.packets || 0), 0);
 
       // Get date range
       const dateFrom = document.getElementById('filterDateFrom').value;
@@ -1429,9 +886,10 @@
             <td>${index + 1}</td>
             <td>${record.farmName}</td>
             <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
-            <td>${record.eggs.toLocaleString()}</td>
-            <td>${record.flats.toFixed(2)}</td>
-            <td>${record.packets.toFixed(2)}</td>
+            <td>${(record.packets || 0).toLocaleString()}</td>
+            <td>${(record.flats || 0).toLocaleString()}</td>
+            <td>${(record.eggs || 0).toLocaleString()}</td>
+            <td><strong>${(record.totalEggs || 0).toLocaleString()} هێلکە </strong></td>
           </tr>
         `;
       });
@@ -1450,7 +908,7 @@
             <div class="info-card">
               <h3>زانیاری کۆمپانیا</h3>
               <p><strong>ناو:</strong> سەرژمێری هێلکە</p>
-              <p><strong>دەرچووکراو لەلایەن:</strong> ${currentUser.firstname} ${currentUser.lastname}</p>
+              <p><strong>وەسڵ لەلایەن:</strong> ${currentUser.firstname} ${currentUser.lastname}</p>
               <p><strong>بەروار:</strong> ${new Date().toLocaleDateString('en-GB')}</p>
               <p><strong>کات:</strong> ${new Date().toLocaleTimeString('en-GB')}</p>
             </div>
@@ -1473,11 +931,11 @@
               </div>
               <div class="summary-card">
                 <h4>کۆی تەبەق</h4>
-                <p class="value">${totalFlats.toFixed(2)}</p>
+                <p class="value">${totalFlats.toLocaleString()}</p>
               </div>
               <div class="summary-card">
                 <h4>کۆی کارتۆن</h4>
-                <p class="value">${totalPackets.toFixed(2)}</p>
+                <p class="value">${totalPackets.toLocaleString()}</p>
               </div>
             </div>
           </div>
@@ -1490,9 +948,10 @@
                   <th>#</th>
                   <th>فارم</th>
                   <th>بەروار</th>
-                  <th>هێلکە</th>
-                  <th>تەبەق</th>
                   <th>کارتۆن</th>
+                  <th>تەبەق</th>
+                  <th>هێلکە</th>
+                  <th>کۆی گشتی</th>
                 </tr>
               </thead>
               <tbody>

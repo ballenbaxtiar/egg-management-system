@@ -30,6 +30,7 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- Receipt Styles -->
   <style>
     .filter {
       position: absolute;
@@ -170,7 +171,7 @@
 
     .summary-cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 15px;
       margin-bottom: 30px;
     }
@@ -291,6 +292,7 @@
       margin-bottom: 15px;
     }
   </style>
+
 </head>
 
 <body>
@@ -359,26 +361,22 @@
         <ul id="components-nav" class="nav-content " data-bs-parent="#sidebar-nav">
           <li>
             <a href="farm1.html">
-              <i class="bi bi-circle"></i>
-              <span">فارمی یەکەم</span>
+              <i class="bi bi-circle"></i><span>فارمی یەکەم</span>
             </a>
           </li>
           <li>
             <a href="farm2.html">
-              <i class="bi bi-circle"></i>
-              <span">فارمی دووەم</span>
+              <i class="bi bi-circle"></i><span>فارمی دووەم</span>
             </a>
           </li>
           <li>
             <a href="farm3.html">
-              <i class="bi bi-circle"></i>
-              <span">فارمی سێیەم</span>
+              <i class="bi bi-circle"></i><span>فارمی سێیەم</span>
             </a>
           </li>
           <li>
             <a href="farm4.html" class="active">
-              <i class="bi bi-circle"></i>
-              <span">فارمی چوارەم</span>
+              <i class="bi bi-circle" ></i><span>فارمی چوارەم</span>
             </a>
           </li>
         </ul>
@@ -412,7 +410,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" onclick="alert('ئەم خزمەتگوزاریە جارێ بەردەست نییە!');">
+        <a class="nav-link collapsed" href="settings.html">
           <i class="bi bi-gear"></i>
           <span>ڕێکخستن</span>
         </a>
@@ -451,24 +449,30 @@
               <h5 class="card-title">داخڵکردنی فارمی چوار</h5>
               <form id="registerForm">
                 <div class="row">
+                  <!-- ✅ NEW ORDER: Packets first -->
                   <div class="col-md-4">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="eggsnumber" placeholder="" required>
-                      <label for="eggsnumber">عەدەدی هێلکە</label>
+                      <input type="number" class="form-control" id="eggspacket" placeholder="" required min="0"
+                        step="1">
+                      <label for="eggspacket">عەدەدی کارتۆن</label>
                     </div>
                   </div>
 
+                  <!-- ✅ Flats second -->
                   <div class="col-md-4">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="flatofeggs" placeholder="" required>
+                      <input type="number" class="form-control" id="flatofeggs" placeholder="" required min="0"
+                        step="1">
                       <label for="flatofeggs">عەدەدی تەبەق</label>
                     </div>
                   </div>
 
+                  <!-- ✅ Eggs last -->
                   <div class="col-md-4">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="eggspacket" placeholder="" required>
-                      <label for="eggspacket">عەدەدی کارتۆن</label>
+                      <input type="number" class="form-control" id="eggsnumber" placeholder="" required min="0"
+                        step="1">
+                      <label for="eggsnumber">عەدەدی هێلکە</label>
                     </div>
                   </div>
 
@@ -501,19 +505,18 @@
             <div class="card-body">
               <h5 class="card-title">خشتەی فارمی چوار</h5>
 
-
               <div class="row">
                 <!-- Date Range Filter -->
                 <div class="col-md-3">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="filterDateFrom">
-                    <label for="filterDateFrom">لە بەروارێ</label>
+                    <label for="filterDateFrom">لە بەرواری</label>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="filterDateTo">
-                    <label for="filterDateTo">بۆ بەروارێ</label>
+                    <label for="filterDateTo">بۆ بەرواری</label>
                   </div>
                 </div>
 
@@ -521,7 +524,7 @@
                 <div class="col-md-3">
                   <div class="form-floating mb-3">
                     <select class="form-select" id="filterQuick" onchange="applyQuickFilter()">
-                      <option value="">هەڵبژاردنی خێرا</option>
+                      <option value="">هەڵبژاردن</option>
                       <option value="week">حەفتەی ڕابردوو (7 ڕۆژ)</option>
                       <option value="month">مانگی ڕابردوو (30 ڕۆژ)</option>
                       <option value="month1">مانگی یەکەم</option>
@@ -567,14 +570,17 @@
                   <div class="alert alert-info" id="filterSummary" style="display: none;">
                     <h6 class="alert-heading">کۆی گشتی:</h6>
                     <div class="row">
-                      <div class="col-md-4">
-                        <strong>کۆی هێلکە:</strong> <span id="totalEggs">0</span>
-                      </div>
-                      <div class="col-md-4">
-                        <strong>کۆی تەبەق:</strong> <span id="totalFlats">0</span>
-                      </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <strong>کۆی کارتۆن:</strong> <span id="totalPackets">0</span>
+                      </div>
+                      <div class="col-md-3">
+                        <strong>کۆی تەبەقی زیاد:</strong> <span id="totalFlats">0</span>
+                      </div>
+                      <div class="col-md-3">
+                        <strong>کۆی هێلکەی زیاد:</strong> <span id="totalEggs">0</span>
+                      </div>
+                      <div class="col-md-3">
+                        <strong>کۆی گشتی هێلکە:</strong> <span id="totalTotalEggs">0</span>
                       </div>
                     </div>
                     <div class="row mt-2">
@@ -584,33 +590,37 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
 
-                <table class="table datatable table-farm">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">هێلکە</th>
-                      <th scope="col">تەبەق</th>
-                      <th scope="col">کارتۆن</th>
-                      <th scope="col">بەرواری داخڵکردن</th>
-                      <th scope="col">بەرواری گۆڕین</th>
-                      <th scope="col">کردارەکان</th>
-                    </tr>
-                  </thead>
-                  <tbody id="farmTableBody">
-                    <tr>
-                      <td colspan="7" class="text-center">چاوەڕێی داتا...</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="card">
+                  <div class="card-body">
+
+                    <table class="table datatable table-farm">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">کارتۆن</th>
+                          <th scope="col">تەبەق</th>
+                          <th scope="col">هێلکە</th>
+                          <th scope="col">کۆی گشتی</th>
+                          <th scope="col">بەروار</th>
+                          <th scope="col">بەرواری گۆڕین</th>
+                          <th scope="col">کردارەکان</th>
+                        </tr>
+                      </thead>
+                      <tbody id="farmTableBody">
+                        <tr>
+                          <td colspan="8" class="text-center">چاوەڕێی داتا...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </section>
 
   </main><!-- End #main -->
@@ -626,17 +636,21 @@
         <div class="modal-body" dir="rtl">
           <form id="updateForm">
             <input type="hidden" id="updateId">
+
+            <!-- ✅ NEW ORDER: Packets first -->
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="updateEggs" required>
-              <label for="updateEggs">عەدەدی هێلکە</label>
+              <input type="number" class="form-control" id="updatePackets" required min="0" step="1">
+              <label for="updatePackets">عەدەدی کارتۆن</label>
             </div>
+
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="updateFlats" required>
+              <input type="number" class="form-control" id="updateFlats" required min="0" step="1">
               <label for="updateFlats">عەدەدی تەبەق</label>
             </div>
+
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="updatePackets" required>
-              <label for="updatePackets">عەدەدی کارتۆن</label>
+              <input type="number" class="form-control" id="updateEggs" required min="0" step="1">
+              <label for="updateEggs">عەدەدی هێلکە</label>
             </div>
           </form>
         </div>
@@ -662,7 +676,7 @@
       class="bi bi-arrow-up-short"></i></a>
 
   <!-- Hidden Receipt Container -->
-  <div id="receiptContainer" style="position:absolute;left:-9999px;"></div>
+  <div id="receiptContainer"></div>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -685,30 +699,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script>
-    // Load settings
-    const appSettings = window.getAppSettings ? window.getAppSettings() : {
-      calculation: { eggsPerFlat: 30, flatsPerPacket: 12 },
-      farms: { colors: {}, active: {} }
-    };
+    // ============================================
+    // CONSTANTS
+    // ============================================
+    const EGGS_PER_FLAT = 30;
+    const EGGS_PER_PACKET = 360; // 30 × 12
 
-    // Use dynamic calculation values
-    const EGGS_PER_FLAT = appSettings.calculation.eggsPerFlat;
-    const FLATS_PER_PACKET = appSettings.calculation.flatsPerPacket;
-    const EGGS_PER_PACKET = EGGS_PER_FLAT * FLATS_PER_PACKET;
-
-    // Apply farm colors
-    if (appSettings.farms.colors.farm1) {
-      const style = document.createElement('style');
-      style.textContent = `
-    .farm-1-row { background-color: ${appSettings.farms.colors.farm1} !important; }
-    .farm-2-row { background-color: ${appSettings.farms.colors.farm2} !important; }
-    .farm-3-row { background-color: ${appSettings.farms.colors.farm3} !important; }
-    .farm-4-row { background-color: ${appSettings.farms.colors.farm4} !important; }
-  `;
-      document.head.appendChild(style);
-    }
-
-    // Check authentication
+    // ============================================
+    // AUTHENTICATION CHECK
+    // ============================================
     const currentUser = checkAuth();
     if (currentUser) {
       document.getElementById('headerUsername').textContent = currentUser.firstname;
@@ -726,81 +725,22 @@
     let allRecords = []; // Store all records for filtering
     let filteredRecords = []; // Store currently filtered records
 
-    // ========== CALCULATION LOGIC FOR REGISTRATION FORM ==========
-    const eggsInput = document.getElementById("eggsnumber");
-    const flatsInput = document.getElementById("flatofeggs");
-    const packetsInput = document.getElementById("eggspacket");
+    // ============================================
+    // ✅ NO AUTO-CALCULATION - REMOVED ALL EVENT LISTENERS
+    // ============================================
+    // Users enter packets, flats, and eggs independently
+    // Server calculates totalEggs automatically
 
-    let isUpdating = false;
-
-    eggsInput.addEventListener("input", () => {
-      if (isUpdating) return;
-      isUpdating = true;
-      const eggs = Number(eggsInput.value) || 0;
-      flatsInput.value = (eggs / EGGS_PER_FLAT).toFixed(2);
-      packetsInput.value = (eggs / EGGS_PER_PACKET).toFixed(2);
-      isUpdating = false;
-    });
-
-    flatsInput.addEventListener("input", () => {
-      if (isUpdating) return;
-      isUpdating = true;
-      const flats = Number(flatsInput.value) || 0;
-      eggsInput.value = flats * EGGS_PER_FLAT;
-      packetsInput.value = (flats / FLATS_PER_PACKET).toFixed(2);
-      isUpdating = false;
-    });
-
-    packetsInput.addEventListener("input", () => {
-      if (isUpdating) return;
-      isUpdating = true;
-      const packets = Number(packetsInput.value) || 0;
-      flatsInput.value = packets * FLATS_PER_PACKET;
-      eggsInput.value = packets * EGGS_PER_PACKET;
-      isUpdating = false;
-    });
-
-    // ========== CALCULATION LOGIC FOR UPDATE MODAL ==========
-    const updateEggsInput = document.getElementById("updateEggs");
-    const updateFlatsInput = document.getElementById("updateFlats");
-    const updatePacketsInput = document.getElementById("updatePackets");
-
-    let isUpdatingModal = false;
-
-    updateEggsInput.addEventListener("input", () => {
-      if (isUpdatingModal) return;
-      isUpdatingModal = true;
-      const eggs = Number(updateEggsInput.value) || 0;
-      updateFlatsInput.value = (eggs / EGGS_PER_FLAT).toFixed(2);
-      updatePacketsInput.value = (eggs / EGGS_PER_PACKET).toFixed(2);
-      isUpdatingModal = false;
-    });
-
-    updateFlatsInput.addEventListener("input", () => {
-      if (isUpdatingModal) return;
-      isUpdatingModal = true;
-      const flats = Number(updateFlatsInput.value) || 0;
-      updateEggsInput.value = flats * EGGS_PER_FLAT;
-      updatePacketsInput.value = (flats / FLATS_PER_PACKET).toFixed(2);
-      isUpdatingModal = false;
-    });
-
-    updatePacketsInput.addEventListener("input", () => {
-      if (isUpdatingModal) return;
-      isUpdatingModal = true;
-      const packets = Number(updatePacketsInput.value) || 0;
-      updateFlatsInput.value = packets * FLATS_PER_PACKET;
-      updateEggsInput.value = packets * EGGS_PER_PACKET;
-      isUpdatingModal = false;
-    });
-
-    // ========== FORM SUBMISSION ==========
+    // ============================================
+    // FORM SUBMISSION
+    // ============================================
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const eggs = Number(document.getElementById('eggsnumber').value);
-      const flats = Number(document.getElementById('flatofeggs').value);
-      const packets = Number(document.getElementById('eggspacket').value);
+      // ✅ NEW ORDER: packets, flats, eggs
+      const packets = Number(document.getElementById('eggspacket').value) || 0;
+      const flats = Number(document.getElementById('flatofeggs').value) || 0;
+      const eggs = Number(document.getElementById('eggsnumber').value) || 0;
       const date = document.getElementById('todayDate').value;
 
       try {
@@ -811,7 +751,7 @@
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ eggs, flats, packets, date })
+          body: JSON.stringify({ packets, flats, eggs, date })
         });
 
         const data = await res.json();
@@ -829,7 +769,9 @@
       }
     });
 
-    // ========== LOAD FARM DATA ==========
+    // ============================================
+    // LOAD FARM DATA
+    // ============================================
     async function loadFarmData() {
       try {
         const token = localStorage.getItem('token');
@@ -842,8 +784,8 @@
         const data = await res.json();
 
         if (res.ok) {
-          allRecords = data.records; // Store all records
-          filteredRecords = allRecords; // Initialize filtered records
+          allRecords = data.records;
+          filteredRecords = allRecords;
           displayFarmData(allRecords);
         }
       } catch (error) {
@@ -851,12 +793,14 @@
       }
     }
 
-    // ========== DISPLAY FARM DATA ==========
+    // ============================================
+    // DISPLAY FARM DATA
+    // ============================================
     function displayFarmData(records) {
       const tbody = document.getElementById('farmTableBody');
 
       if (records.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center">هیچ داتایەک نییە</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center">هیچ داتایەک نییە</td></tr>';
         document.getElementById('filterSummary').style.display = 'none';
         return;
       }
@@ -864,40 +808,46 @@
       tbody.innerHTML = records.map((record, index) => `
         <tr>
           <th scope="row">${index + 1}</th>
-          <td>${record.eggs}</td>
-          <td>${record.flats}</td>
           <td>${record.packets}</td>
+          <td>${record.flats}</td>
+          <td>${record.eggs}</td>
+          <td><strong style="color: #0d6efd;">${record.totalEggs.toLocaleString()}</strong></td>
           <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
           <td>${record.updatedAt ? new Date(record.updatedAt).toLocaleDateString('en-GB') : '-'}</td>
           <td>
-            <button class="btn btn-warning btn-sm" onclick='openUpdateModal(${JSON.stringify(record)})'>
+            <button class="btn btn-warning btn-sm table-btn" onclick='openUpdateModal(${JSON.stringify(record)})'>
               <i class="bi bi-pencil"></i> گۆڕین
             </button>
-            <button class="btn btn-danger btn-sm" onclick="deleteFarmRecord('${record._id}')">
+            <button class="btn btn-danger btn-sm table-btn" onclick="deleteFarmRecord('${record._id}')">
               <i class="bi bi-trash"></i> سڕینەوە
             </button>
           </td>
         </tr>
       `).join('');
 
-      // Update summary
       updateSummary(records);
     }
 
-    // ========== UPDATE SUMMARY ==========
+    // ============================================
+    // UPDATE SUMMARY
+    // ============================================
     function updateSummary(records) {
-      const totalEggs = records.reduce((sum, r) => sum + r.eggs, 0);
-      const totalFlats = records.reduce((sum, r) => sum + r.flats, 0);
       const totalPackets = records.reduce((sum, r) => sum + r.packets, 0);
+      const totalFlats = records.reduce((sum, r) => sum + r.flats, 0);
+      const totalEggs = records.reduce((sum, r) => sum + r.eggs, 0);
+      const totalTotalEggs = records.reduce((sum, r) => sum + r.totalEggs, 0);
 
+      document.getElementById('totalPackets').textContent = totalPackets.toLocaleString();
+      document.getElementById('totalFlats').textContent = totalFlats.toLocaleString();
       document.getElementById('totalEggs').textContent = totalEggs.toLocaleString();
-      document.getElementById('totalFlats').textContent = totalFlats.toFixed(2);
-      document.getElementById('totalPackets').textContent = totalPackets.toFixed(2);
+      document.getElementById('totalTotalEggs').textContent = totalTotalEggs.toLocaleString();
       document.getElementById('totalRecords').textContent = records.length;
       document.getElementById('filterSummary').style.display = 'block';
     }
 
-    // ========== QUICK FILTER ==========
+    // ============================================
+    // QUICK FILTER
+    // ============================================
     function applyQuickFilter() {
       const quickFilter = document.getElementById('filterQuick').value;
       const year = parseInt(document.getElementById('filterYear').value) || new Date().getFullYear();
@@ -928,7 +878,9 @@
       }
     }
 
-    // ========== APPLY FILTER ==========
+    // ============================================
+    // APPLY FILTER
+    // ============================================
     function applyFilter() {
       const dateFrom = document.getElementById('filterDateFrom').value;
       const dateTo = document.getElementById('filterDateTo').value;
@@ -940,16 +892,20 @@
           const recordDate = new Date(record.createdAt);
           const from = dateFrom ? new Date(dateFrom) : new Date('1900-01-01');
           const to = dateTo ? new Date(dateTo) : new Date('2100-12-31');
+
           to.setHours(23, 59, 59, 999);
+
           return recordDate >= from && recordDate <= to;
         });
       }
 
-      filteredRecords = filtered; // Update filtered records
+      filteredRecords = filtered;
       displayFarmData(filtered);
     }
 
-    // ========== CLEAR FILTER ==========
+    // ============================================
+    // CLEAR FILTER
+    // ============================================
     function clearFilter() {
       document.getElementById('filterDateFrom').value = '';
       document.getElementById('filterDateTo').value = '';
@@ -959,23 +915,27 @@
       displayFarmData(allRecords);
     }
 
-    // ========== OPEN UPDATE MODAL ==========
+    // ============================================
+    // OPEN UPDATE MODAL
+    // ============================================
     function openUpdateModal(record) {
       document.getElementById('updateId').value = record._id;
-      document.getElementById('updateEggs').value = record.eggs;
-      document.getElementById('updateFlats').value = record.flats;
       document.getElementById('updatePackets').value = record.packets;
+      document.getElementById('updateFlats').value = record.flats;
+      document.getElementById('updateEggs').value = record.eggs;
 
       const modal = new bootstrap.Modal(document.getElementById('updateModal'));
       modal.show();
     }
 
-    // ========== SAVE UPDATE ==========
+    // ============================================
+    // SAVE UPDATE
+    // ============================================
     async function saveUpdate() {
       const id = document.getElementById('updateId').value;
-      const eggs = Number(document.getElementById('updateEggs').value);
-      const flats = Number(document.getElementById('updateFlats').value);
-      const packets = Number(document.getElementById('updatePackets').value);
+      const packets = Number(document.getElementById('updatePackets').value) || 0;
+      const flats = Number(document.getElementById('updateFlats').value) || 0;
+      const eggs = Number(document.getElementById('updateEggs').value) || 0;
 
       try {
         const token = localStorage.getItem('token');
@@ -985,7 +945,7 @@
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ eggs, flats, packets })
+          body: JSON.stringify({ packets, flats, eggs })
         });
 
         const data = await res.json();
@@ -1002,7 +962,9 @@
       }
     }
 
-    // ========== DELETE RECORD ==========
+    // ============================================
+    // DELETE RECORD
+    // ============================================
     async function deleteFarmRecord(id) {
       if (!confirm('دڵنیایت لە سڕینەوەی ئەم داتایە؟')) {
         return;
@@ -1030,7 +992,9 @@
       }
     }
 
-    // ========== GENERATE RECEIPT ==========
+    // ============================================
+    // GENERATE RECEIPT
+    // ============================================
     async function generateReceipt() {
       if (filteredRecords.length === 0) {
         alert('❌ هیچ داتایەک بۆ دروستکردنی وەسڵ نییە');
@@ -1044,9 +1008,10 @@
       document.body.appendChild(loadingMsg);
 
       // Calculate totals
-      const totalEggs = filteredRecords.reduce((sum, r) => sum + r.eggs, 0);
-      const totalFlats = filteredRecords.reduce((sum, r) => sum + r.flats, 0);
       const totalPackets = filteredRecords.reduce((sum, r) => sum + r.packets, 0);
+      const totalFlats = filteredRecords.reduce((sum, r) => sum + r.flats, 0);
+      const totalEggs = filteredRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const totalTotalEggs = filteredRecords.reduce((sum, r) => sum + r.totalEggs, 0);
 
       // Get date range
       const dateFrom = document.getElementById('filterDateFrom').value;
@@ -1067,9 +1032,10 @@
           <tr>
             <td>${index + 1}</td>
             <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
+            <td>${record.packets.toLocaleString()}</td>
+            <td>${record.flats.toLocaleString()}</td>
             <td>${record.eggs.toLocaleString()}</td>
-            <td>${record.flats.toFixed(2)}</td>
-            <td>${record.packets.toFixed(2)}</td>
+            <td><strong>${record.totalEggs.toLocaleString()} هێلکە </strong></td>
           </tr>
         `;
       });
@@ -1080,7 +1046,7 @@
         
         <div class="receipt-header">
           <h1>وەسڵی داخڵکردن</h1>
-          <h2>فارمی چوارەم - کورتەی داخڵکردنی هێلکە</h2>
+          <h2>فارمی یەکەم - کورتەی داخڵکردنی هێلکە</h2>
         </div>
 
         <div class="receipt-body">
@@ -1088,7 +1054,7 @@
             <div class="info-card">
               <h3>زانیاری کۆمپانیا</h3>
               <p><strong>ناو:</strong> سەرژمێری هێلکە</p>
-              <p><strong>دەرچووکراو لەلایەن:</strong> ${currentUser.firstname} ${currentUser.lastname}</p>
+              <p><strong>وەسڵ لەلایەن:</strong> ${currentUser.firstname} ${currentUser.lastname}</p>
               <p><strong>بەروار:</strong> ${new Date().toLocaleDateString('en-GB')}</p>
               <p><strong>کات:</strong> ${new Date().toLocaleTimeString('en-GB')}</p>
             </div>
@@ -1098,7 +1064,7 @@
               <p><strong>ژمارەی وەسڵ:</strong> #${Date.now().toString().slice(-8)}</p>
               <p><strong>ماوە:</strong> ${dateRangeText}</p>
               <p><strong>کۆی تۆمارەکان:</strong> ${filteredRecords.length}</p>
-              <p><strong>فارم:</strong> فارمی چوارەم</p>
+              <p><strong>فارم:</strong> فارمی یەکەم</p>
             </div>
           </div>
 
@@ -1106,16 +1072,21 @@
             <h3 class="summary-title">کورتەی داخڵکردن</h3>
             <div class="summary-cards">
               <div class="summary-card">
-                <h4>کۆی هێلکە</h4>
+                <h4>کۆی کارتۆن</h4>
+                <p class="value">${totalPackets.toLocaleString()}</p>
+              </div>
+              <div class="summary-card">
+                <h4>کۆی تەبەقی زیاد</h4>
+                <p class="value">${totalFlats.toLocaleString()}</p>
+              </div>
+              
+              <div class="summary-card">
+                <h4>کۆی هێلکەی زیاد</h4>
                 <p class="value">${totalEggs.toLocaleString()}</p>
               </div>
               <div class="summary-card">
-                <h4>کۆی تەبەق</h4>
-                <p class="value">${totalFlats.toFixed(2)}</p>
-              </div>
-              <div class="summary-card">
-                <h4>کۆی کارتۆن</h4>
-                <p class="value">${totalPackets.toFixed(2)}</p>
+                <h4>کۆی گشتی هێلکە</h4>
+                <p class="value">${totalTotalEggs.toLocaleString()}</p>
               </div>
             </div>
           </div>
@@ -1127,9 +1098,10 @@
                 <tr>
                   <th>#</th>
                   <th>بەروار</th>
-                  <th>هێلکە</th>
-                  <th>تەبەق</th>
                   <th>کارتۆن</th>
+                  <th>تەبەق</th>
+                  <th>هێلکە</th>
+                  <th>کۆی گشتی</th>
                 </tr>
               </thead>
               <tbody>
@@ -1160,8 +1132,8 @@
           useCORS: true,
           logging: false,
           backgroundColor: '#f5f7fa',
-          width: 794, // A4 width in pixels at 96 DPI
-          height: 1123 // A4 height in pixels at 96 DPI
+          width: 794,
+          height: 1123
         });
 
         // Convert canvas to PDF
@@ -1196,7 +1168,6 @@
         alert('❌ هەڵەیەک ڕوویدا لە دروستکردنی وەسڵ: ' + error.message);
       }
     }
-    
   </script>
 
 </body>

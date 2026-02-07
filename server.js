@@ -13,17 +13,15 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
-  process.env.FRONTEND_URL, // Add your frontend URL in Railway env variables
-  /\.railway\.app$/, // Allow all Railway domains
-  /\.vercel\.app$/, // If you use Vercel for frontend
+  process.env.FRONTEND_URL,
+  /\.railway\.app$/,
+  /\.vercel\.app$/,
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (mobile apps, Postman)
       if (!origin) return callback(null, true);
-
       if (
         allowedOrigins.some((allowed) => {
           if (allowed instanceof RegExp) {
@@ -34,7 +32,7 @@ app.use(
       ) {
         callback(null, true);
       } else {
-        callback(null, true); // Allow all for now
+        callback(null, true);
       }
     },
     credentials: true,
@@ -62,11 +60,13 @@ const userSchemaOld = new mongoose.Schema(
 
 const User = mongoose.model("User", userSchemaOld);
 
+// ✅ UPDATED FARM SCHEMA
 const farmSchema = new mongoose.Schema(
   {
-    eggs: { type: Number, required: true },
-    flats: { type: Number, required: true },
-    packets: { type: Number, required: true },
+    packets: { type: Number, required: true, default: 0 }, // عەدەدی کارتۆن
+    flats: { type: Number, required: true, default: 0 }, // عەدەدی تەبەق
+    eggs: { type: Number, required: true, default: 0 }, // عەدەدی هێلکە
+    totalEggs: { type: Number, required: true }, // کۆی گشتی هێلکە
     date: { type: String, required: true },
     farmNumber: { type: Number, required: true },
     createdAt: { type: Date, default: Date.now },
@@ -90,6 +90,12 @@ const settingsSchema = new mongoose.Schema(
 );
 
 const Settings = mongoose.model("Settings", settingsSchema);
+
+// ============================================
+// CONSTANTS FOR CALCULATION
+// ============================================
+const EGGS_PER_FLAT = 30;
+const EGGS_PER_PACKET = 360; // 30 × 12
 
 // ============================================
 // DATABASE CONNECTION
@@ -135,7 +141,7 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET || "your-secret-key",
+      process.env.JWT_SECRET || "a822a59d6b145beb02601b1e446a451b3079200a045ad2c6353d9d1c7e88ba97475e6f28e802ca4e45b7e16f8af815aa91d9abe4214078fe23ea0896ab0d08ff",
     );
     req.user = decoded;
     next();
@@ -201,17 +207,15 @@ app.post("/login", async (req, res) => {
   try {
     console.log("🔍 Looking for user:", username);
 
-    // ✅ Fixed query
     const user = await User.findOne({ "_id.username": username }).lean();
 
-    console.log("📝 Found user:", user);
+    console.log("📝 Found user:", user ? "Yes" : "No");
 
     if (!user) {
       console.log("❌ User not found");
       return res.status(401).json({ message: "User not found" });
     }
 
-    // ✅ Fixed password check - use optional chaining
     const storedPassword = user._id?.password || user._id.password;
     console.log("🔐 Checking password...");
 
@@ -220,7 +224,6 @@ app.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Wrong password" });
     }
 
-    // Generate JWT token
     const token = jwt.sign(
       {
         username: user._id.username,
@@ -228,7 +231,7 @@ app.post("/login", async (req, res) => {
         lastname: user._id.lastname,
         type: user._id.type,
       },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET || "your-secret-key",
       { expiresIn: "24h" },
     );
 
@@ -246,10 +249,10 @@ app.post("/login", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ Login error:", error);
-    console.error("Error details:", error.message);
     res.status(500).json({ message: "Server error: " + error.message });
   }
 });
+
 // Verify token
 app.get("/verify", verifyToken, (req, res) => {
   res.json({
@@ -390,14 +393,29 @@ app.delete("/users/:username", verifyToken, async (req, res) => {
 });
 
 // ============================================
-// FARM1 ROUTES
+// FARM1 ROUTES - UPDATED LOGIC
 // ============================================
+
+// ✅ CREATE FARM1 RECORD - Calculate totalEggs on server
 app.post("/farm1", verifyToken, async (req, res) => {
   try {
-    const { eggs, flats, packets, date } = req.body;
-    const newRecord = new Farm({ eggs, flats, packets, date, farmNumber: 1 });
+    const { packets, flats, eggs, date } = req.body;
+
+    // Server-side calculation of total eggs
+    // packets × 360 + flats × 30 + eggs × 1
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
+
+    const newRecord = new Farm({
+      packets,
+      flats,
+      eggs,
+      totalEggs,
+      date,
+      farmNumber: 1,
+    });
+
     await newRecord.save();
-    console.log("✅ Farm1 record created");
+    console.log("✅ Farm1 record created - Total Eggs:", totalEggs);
     res.json({ message: "Record created successfully", record: newRecord });
   } catch (error) {
     console.error("❌ Farm1 creation error:", error);
@@ -405,6 +423,7 @@ app.post("/farm1", verifyToken, async (req, res) => {
   }
 });
 
+// ✅ GET FARM1 RECORDS
 app.get("/farm1", verifyToken, async (req, res) => {
   try {
     const records = await Farm.find({ farmNumber: 1 }).sort({ createdAt: -1 });
@@ -415,18 +434,26 @@ app.get("/farm1", verifyToken, async (req, res) => {
   }
 });
 
+// ✅ UPDATE FARM1 RECORD - Recalculate totalEggs
 app.put("/farm1/:id", verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
-    const { eggs, flats, packets } = req.body;
+    const { packets, flats, eggs } = req.body;
+
+    // Recalculate totalEggs
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
+
     const updatedRecord = await Farm.findByIdAndUpdate(
       id,
-      { eggs, flats, packets, updatedAt: new Date() },
+      { packets, flats, eggs, totalEggs, updatedAt: new Date() },
       { new: true },
     );
-    if (!updatedRecord)
+
+    if (!updatedRecord) {
       return res.status(404).json({ message: "Record not found" });
-    console.log("✅ Farm1 record updated");
+    }
+
+    console.log("✅ Farm1 record updated - Total Eggs:", totalEggs);
     res.json({ message: "Record updated successfully", record: updatedRecord });
   } catch (error) {
     console.error("❌ Farm1 update error:", error);
@@ -434,6 +461,7 @@ app.put("/farm1/:id", verifyToken, async (req, res) => {
   }
 });
 
+// ✅ DELETE FARM1 RECORD
 app.delete("/farm1/:id", verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
@@ -448,14 +476,22 @@ app.delete("/farm1/:id", verifyToken, async (req, res) => {
 });
 
 // ============================================
-// FARM2 ROUTES
+// FARM2 ROUTES - UPDATED LOGIC
 // ============================================
 app.post("/farm2", verifyToken, async (req, res) => {
   try {
-    const { eggs, flats, packets, date } = req.body;
-    const newRecord = new Farm({ eggs, flats, packets, date, farmNumber: 2 });
+    const { packets, flats, eggs, date } = req.body;
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
+    const newRecord = new Farm({
+      packets,
+      flats,
+      eggs,
+      totalEggs,
+      date,
+      farmNumber: 2,
+    });
     await newRecord.save();
-    console.log("✅ Farm2 record created");
+    console.log("✅ Farm2 record created - Total Eggs:", totalEggs);
     res.json({ message: "Record created successfully", record: newRecord });
   } catch (error) {
     console.error("❌ Farm2 creation error:", error);
@@ -476,15 +512,16 @@ app.get("/farm2", verifyToken, async (req, res) => {
 app.put("/farm2/:id", verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
-    const { eggs, flats, packets } = req.body;
+    const { packets, flats, eggs } = req.body;
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
     const updatedRecord = await Farm.findByIdAndUpdate(
       id,
-      { eggs, flats, packets, updatedAt: new Date() },
+      { packets, flats, eggs, totalEggs, updatedAt: new Date() },
       { new: true },
     );
     if (!updatedRecord)
       return res.status(404).json({ message: "Record not found" });
-    console.log("✅ Farm2 record updated");
+    console.log("✅ Farm2 record updated - Total Eggs:", totalEggs);
     res.json({ message: "Record updated successfully", record: updatedRecord });
   } catch (error) {
     console.error("❌ Farm2 update error:", error);
@@ -506,14 +543,22 @@ app.delete("/farm2/:id", verifyToken, async (req, res) => {
 });
 
 // ============================================
-// FARM3 ROUTES
+// FARM3 ROUTES - UPDATED LOGIC
 // ============================================
 app.post("/farm3", verifyToken, async (req, res) => {
   try {
-    const { eggs, flats, packets, date } = req.body;
-    const newRecord = new Farm({ eggs, flats, packets, date, farmNumber: 3 });
+    const { packets, flats, eggs, date } = req.body;
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
+    const newRecord = new Farm({
+      packets,
+      flats,
+      eggs,
+      totalEggs,
+      date,
+      farmNumber: 3,
+    });
     await newRecord.save();
-    console.log("✅ Farm3 record created");
+    console.log("✅ Farm3 record created - Total Eggs:", totalEggs);
     res.json({ message: "Record created successfully", record: newRecord });
   } catch (error) {
     console.error("❌ Farm3 creation error:", error);
@@ -534,15 +579,16 @@ app.get("/farm3", verifyToken, async (req, res) => {
 app.put("/farm3/:id", verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
-    const { eggs, flats, packets } = req.body;
+    const { packets, flats, eggs } = req.body;
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
     const updatedRecord = await Farm.findByIdAndUpdate(
       id,
-      { eggs, flats, packets, updatedAt: new Date() },
+      { packets, flats, eggs, totalEggs, updatedAt: new Date() },
       { new: true },
     );
     if (!updatedRecord)
       return res.status(404).json({ message: "Record not found" });
-    console.log("✅ Farm3 record updated");
+    console.log("✅ Farm3 record updated - Total Eggs:", totalEggs);
     res.json({ message: "Record updated successfully", record: updatedRecord });
   } catch (error) {
     console.error("❌ Farm3 update error:", error);
@@ -564,14 +610,22 @@ app.delete("/farm3/:id", verifyToken, async (req, res) => {
 });
 
 // ============================================
-// FARM4 ROUTES
+// FARM4 ROUTES - UPDATED LOGIC
 // ============================================
 app.post("/farm4", verifyToken, async (req, res) => {
   try {
-    const { eggs, flats, packets, date } = req.body;
-    const newRecord = new Farm({ eggs, flats, packets, date, farmNumber: 4 });
+    const { packets, flats, eggs, date } = req.body;
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
+    const newRecord = new Farm({
+      packets,
+      flats,
+      eggs,
+      totalEggs,
+      date,
+      farmNumber: 4,
+    });
     await newRecord.save();
-    console.log("✅ Farm4 record created");
+    console.log("✅ Farm4 record created - Total Eggs:", totalEggs);
     res.json({ message: "Record created successfully", record: newRecord });
   } catch (error) {
     console.error("❌ Farm4 creation error:", error);
@@ -592,15 +646,16 @@ app.get("/farm4", verifyToken, async (req, res) => {
 app.put("/farm4/:id", verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
-    const { eggs, flats, packets } = req.body;
+    const { packets, flats, eggs } = req.body;
+    const totalEggs = packets * EGGS_PER_PACKET + flats * EGGS_PER_FLAT + eggs;
     const updatedRecord = await Farm.findByIdAndUpdate(
       id,
-      { eggs, flats, packets, updatedAt: new Date() },
+      { packets, flats, eggs, totalEggs, updatedAt: new Date() },
       { new: true },
     );
     if (!updatedRecord)
       return res.status(404).json({ message: "Record not found" });
-    console.log("✅ Farm4 record updated");
+    console.log("✅ Farm4 record updated - Total Eggs:", totalEggs);
     res.json({ message: "Record updated successfully", record: updatedRecord });
   } catch (error) {
     console.error("❌ Farm4 update error:", error);

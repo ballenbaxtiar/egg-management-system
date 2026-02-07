@@ -362,7 +362,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" onclick="alert('ئەم خزمەتگوزاریە جارێ بەردەست نییە!');">
+        <a class="nav-link collapsed" href="settings.html">
           <i class="bi bi-gear"></i>
           <span>ڕێکخستن</span>
         </a>
@@ -469,78 +469,76 @@
 
 
         <!-- Daily, Weekly, Monthly Comparison -->
-        <div class="row" dir="rtl">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">بەراوردی بەرهەمهێنان <span>| ڕۆژانە، حەفتانە، مانگانە</span></h5>
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">بەراوردی بەرهەمهێنان <span>| ڕۆژانە، حەفتانە، مانگانە</span></h5>
 
-                <div class="row">
-                  <!-- Daily Production -->
-                  <div class="col-md-4">
-                    <div class="card bg-primary-light">
-                      <div class="card-body">
-                        <h6 class="card-title text-primary"><i class="bi bi-calendar-day"></i> بەرهەمی ڕۆژانە</h6>
-                        <div class="row">
-                          <div class="col-6">
-                            <p class="mb-1"><strong>ئەمڕۆ:</strong></p>
-                            <h4 class="text-primary" id="dailyToday">0</h4>
-                          </div>
-                          <div class="col-6">
-                            <p class="mb-1"><strong>دوێنێ:</strong></p>
-                            <h4 class="text-muted" id="dailyYesterday">0</h4>
-                          </div>
+              <div class="row">
+                <!-- Daily Production -->
+                <div class="col-md-4">
+                  <div class="card bg-primary-light">
+                    <div class="card-body">
+                      <h6 class="card-title text-primary"><i class="bi bi-calendar-day"></i> بەرهەمی ڕۆژانە</h6>
+                      <div class="row">
+                        <div class="col-6">
+                          <p class="mb-1"><strong>ئەمڕۆ:</strong></p>
+                          <h4 class="text-primary" id="dailyToday">0</h4>
                         </div>
-                        <div class="mt-2">
-                          <span class="badge bg-primary" id="dailyChange">0%</span>
-                          <small class="text-muted"> جیاوازی</small>
+                        <div class="col-6">
+                          <p class="mb-1"><strong>دوێنێ:</strong></p>
+                          <h4 class="text-muted" id="dailyYesterday">0</h4>
                         </div>
+                      </div>
+                      <div class="mt-2">
+                        <span class="badge bg-primary" id="dailyChange">0%</span>
+                        <small class="text-muted"> جیاوازی</small>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <!-- Weekly Production -->
-                  <div class="col-md-4">
-                    <div class="card bg-success-light">
-                      <div class="card-body">
-                        <h6 class="card-title text-success"><i class="bi bi-calendar-week"></i> بەرهەمی حەفتانە</h6>
-                        <div class="row">
-                          <div class="col-6">
-                            <p class="mb-1"><strong>ئەم حەفتە:</strong></p>
-                            <h4 class="text-success" id="weeklyThis">0</h4>
-                          </div>
-                          <div class="col-6">
-                            <p class="mb-1"><strong>حەفتەی پێشوو:</strong></p>
-                            <h4 class="text-muted" id="weeklyLast">0</h4>
-                          </div>
+                <!-- Weekly Production -->
+                <div class="col-md-4">
+                  <div class="card bg-success-light">
+                    <div class="card-body">
+                      <h6 class="card-title text-success"><i class="bi bi-calendar-week"></i> بەرهەمی حەفتانە</h6>
+                      <div class="row">
+                        <div class="col-6">
+                          <p class="mb-1"><strong>ئەم حەفتە:</strong></p>
+                          <h4 class="text-success" id="weeklyThis">0</h4>
                         </div>
-                        <div class="mt-2">
-                          <span class="badge bg-success" id="weeklyChange">0%</span>
-                          <small class="text-muted"> جیاوازی</small>
+                        <div class="col-6">
+                          <p class="mb-1"><strong>حەفتەی پێشوو:</strong></p>
+                          <h4 class="text-muted" id="weeklyLast">0</h4>
                         </div>
+                      </div>
+                      <div class="mt-2">
+                        <span class="badge bg-success" id="weeklyChange">0%</span>
+                        <small class="text-muted"> جیاوازی</small>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <!-- Monthly Production -->
-                  <div class="col-md-4">
-                    <div class="card bg-warning-light">
-                      <div class="card-body">
-                        <h6 class="card-title text-warning"><i class="bi bi-calendar-month"></i> بەرهەمی مانگانە</h6>
-                        <div class="row">
-                          <div class="col-6">
-                            <p class="mb-1"><strong>ئەم مانگە:</strong></p>
-                            <h4 class="text-warning" id="monthlyThis">0</h4>
-                          </div>
-                          <div class="col-6">
-                            <p class="mb-1"><strong>مانگی پێشوو:</strong></p>
-                            <h4 class="text-muted" id="monthlyLast">0</h4>
-                          </div>
+                <!-- Monthly Production -->
+                <div class="col-md-4">
+                  <div class="card bg-warning-light">
+                    <div class="card-body">
+                      <h6 class="card-title text-warning"><i class="bi bi-calendar-month"></i> بەرهەمی مانگانە</h6>
+                      <div class="row">
+                        <div class="col-6">
+                          <p class="mb-1"><strong>ئەم مانگە:</strong></p>
+                          <h4 class="text-warning" id="monthlyThis">0</h4>
                         </div>
-                        <div class="mt-2">
-                          <span class="badge bg-warning" id="monthlyChange">0%</span>
-                          <small class="text-muted"> جیاوازی</small>
+                        <div class="col-6">
+                          <p class="mb-1"><strong>مانگی پێشوو:</strong></p>
+                          <h4 class="text-muted" id="monthlyLast">0</h4>
                         </div>
+                      </div>
+                      <div class="mt-2">
+                        <span class="badge bg-warning" id="monthlyChange">0%</span>
+                        <small class="text-muted"> جیاوازی</small>
                       </div>
                     </div>
                   </div>
@@ -549,68 +547,65 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Farm Performance Comparison -->
-        <div class="row" dir="rtl">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">بەراوردی کارایی فارمەکان <span>| ئەمڕۆ</span></h5>
+      <!-- Farm Performance Comparison -->
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">بەراوردی کارایی فارمەکان <span>| ئەمڕۆ</span></h5>
 
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="card">
-                      <div class="card-body text-center">
-                        <h6 class="farm-color1">فارمی یەکەم</h6>
-                        <h3 class="farm-color1" id="farm1Today">0</h3>
-                        <p class="text-muted mb-0">هێلکە</p>
-                        <div class="progress mt-2">
-                          <div class="progress-bar bg-secondary" id="farm1Progress" role="progressbar"
-                            style="width: 0%">
-                          </div>
-                        </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h6 class="farm-color1">فارمی یەکەم</h6>
+                    <h3 class="farm-color1" id="farm1Today">0</h3>
+                    <p class="text-muted mb-0">هێلکە</p>
+                    <div class="progress mt-2">
+                      <div class="progress-bar bg-secondary" id="farm1Progress" role="progressbar" style="width: 0%">
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div class="col-md-3">
-                    <div class="card">
-                      <div class="card-body text-center">
-                        <h6 class="farm-color2">فارمی دووەم</h6>
-                        <h3 class="farm-color2" id="farm2Today">0</h3>
-                        <p class="text-muted mb-0">هێلکە</p>
-                        <div class="progress mt-2">
-                          <div class="progress-bar bg-success" id="farm2Progress" role="progressbar" style="width: 0%">
-                          </div>
-                        </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h6 class="farm-color2">فارمی دووەم</h6>
+                    <h3 class="farm-color2" id="farm2Today">0</h3>
+                    <p class="text-muted mb-0">هێلکە</p>
+                    <div class="progress mt-2">
+                      <div class="progress-bar bg-success" id="farm2Progress" role="progressbar" style="width: 0%">
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div class="col-md-3">
-                    <div class="card">
-                      <div class="card-body text-center">
-                        <h6 class="farm-color3">فارمی سێیەم</h6>
-                        <h3 class="farm-color3" id="farm3Today">0</h3>
-                        <p class="text-muted mb-0">هێلکە</p>
-                        <div class="progress mt-2">
-                          <div class="progress-bar bg-danger" id="farm3Progress" role="progressbar" style="width: 0%">
-                          </div>
-                        </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h6 class="farm-color3">فارمی سێیەم</h6>
+                    <h3 class="farm-color3" id="farm3Today">0</h3>
+                    <p class="text-muted mb-0">هێلکە</p>
+                    <div class="progress mt-2">
+                      <div class="progress-bar bg-danger" id="farm3Progress" role="progressbar" style="width: 0%">
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div class="col-md-3">
-                    <div class="card">
-                      <div class="card-body text-center">
-                        <h6 class="text-primary">فارمی چوارەم</h6>
-                        <h3 class="text-primary" id="farm4Today">0</h3>
-                        <p class="text-muted mb-0">هێلکە</p>
-                        <div class="progress mt-2">
-                          <div class="progress-bar bg-primary" id="farm4Progress" role="progressbar" style="width: 0%">
-                          </div>
-                        </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h6 class="text-primary">فارمی چوارەم</h6>
+                    <h3 class="text-primary" id="farm4Today">0</h3>
+                    <p class="text-muted mb-0">هێلکە</p>
+                    <div class="progress mt-2">
+                      <div class="progress-bar bg-primary" id="farm4Progress" role="progressbar" style="width: 0%">
                       </div>
                     </div>
                   </div>
@@ -619,137 +614,137 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Recent Activity & Top Performing Farm -->
-        <div class="row" dir="rtl">
-          <!-- Recent Activity -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">چالاکیەکانی ئەمڕۆ <span>| تۆمارکردنەکان</span></h5>
+      <!-- Recent Activity & Top Performing Farm -->
+      <div class="row" dir="rtl">
+        <!-- Recent Activity -->
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">چالاکیەکانی ئەمڕۆ <span>| تۆمارکردنەکان</span></h5>
 
-                <div class="activity">
-                  <div class="activity-item d-flex" id="activity1" style="display: none !important;">
-                    <div class="activite-label"></div>
-                    <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
-                    <div class="activity-content">
-                       <strong></strong>
-                    </div>
-                  </div>
-
-                  <div class="activity-item d-flex" id="activity2" style="display: none !important;">
-                    <div class="activite-label"></div>
-                    <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
-                    <div class="activity-content">
-                       <strong></strong>
-                    </div>
-                  </div>
-
-                  <div class="activity-item d-flex" id="activity3" style="display: none !important;">
-                    <div class="activite-label"> </div>
-                    <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
-                    <div class="activity-content">
-                       <strong></strong>
-                    </div>
-                  </div>
-
-                  <div class="activity-item d-flex" id="activity4" style="display: none !important;">
-                    <div class="activite-label"></div>
-                    <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
-                    <div class="activity-content">
-                       <strong></strong>
-                    </div>
-                  </div>
-
-                  <div class="activity-item d-flex" id="activity5" style="display: none !important;">
-                    <div class="activite-label"></div>
-                    <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
-                    <div class="activity-content">
-                       <strong></strong>
-                    </div>
-                  </div>
-
-                  <div id="noActivity">
-                    <p class="text-muted text-center">هیچ چالاکیەک نییە بۆ ئەمڕۆ</p>
+              <div class="activity">
+                <div class="activity-item d-flex" id="activity1" style="display: none !important;">
+                  <div class="activite-label"></div>
+                  <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
+                  <div class="activity-content">
+                    <strong></strong>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Top Performing Farm -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">باشترین فارم <span>| ئەم مانگە</span></h5>
+                <div class="activity-item d-flex" id="activity2" style="display: none !important;">
+                  <div class="activite-label"></div>
+                  <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
+                  <div class="activity-content">
+                    <strong></strong>
+                  </div>
+                </div>
 
-                <div class="top-selling">
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">ڕیز</th>
-                        <th scope="col">فارم</th>
-                        <th scope="col">هێلکە</th>
-                        <th scope="col">ڕێژە</th>
-                      </tr>
-                    </thead>
-                    <tbody id="topFarmsTable">
-                      <tr>
-                        <td colspan="4" class="text-center text-muted">چاوەڕێی داتا...</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="activity-item d-flex" id="activity3" style="display: none !important;">
+                  <div class="activite-label"> </div>
+                  <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
+                  <div class="activity-content">
+                    <strong></strong>
+                  </div>
+                </div>
+
+                <div class="activity-item d-flex" id="activity4" style="display: none !important;">
+                  <div class="activite-label"></div>
+                  <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
+                  <div class="activity-content">
+                    <strong></strong>
+                  </div>
+                </div>
+
+                <div class="activity-item d-flex" id="activity5" style="display: none !important;">
+                  <div class="activite-label"></div>
+                  <i class="bi bi-circle-fill activity-badge text-white align-self-start"></i>
+                  <div class="activity-content">
+                    <strong></strong>
+                  </div>
+                </div>
+
+                <div id="noActivity">
+                  <p class="text-muted text-center">هیچ چالاکیەک نییە بۆ ئەمڕۆ</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Statistics Overview -->
-        <div class="row" dir="rtl">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">ئاماری گشتی <span>| کۆی هەموو فارمەکان</span></h5>
+        <!-- Top Performing Farm -->
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">باشترین فارم <span>| ئەم مانگە</span></h5>
 
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="card bg-info-light">
-                      <div class="card-body text-center">
-                        <i class="bi bi-calendar-check" style="font-size: 32px; color: #17a2b8;"></i>
-                        <h6 class="mt-2">کۆی تۆمارەکان</h6>
-                        <h3 id="totalRecords">0</h3>
-                      </div>
+              <div class="top-selling">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">ڕیز</th>
+                      <th scope="col">فارم</th>
+                      <th scope="col">هێلکە</th>
+                      <th scope="col">ڕێژە</th>
+                    </tr>
+                  </thead>
+                  <tbody id="topFarmsTable">
+                    <tr>
+                      <td colspan="4" class="text-center text-muted">چاوەڕێی داتا...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Overview -->
+      <div class="row" dir="rtl">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">ئاماری گشتی <span>| کۆی هەموو فارمەکان</span></h5>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="card bg-info-light">
+                    <div class="card-body text-center">
+                      <i class="bi bi-calendar-check" style="font-size: 32px; color: #17a2b8;"></i>
+                      <h6 class="mt-2">کۆی تۆمارەکان</h6>
+                      <h3 id="totalRecords">0</h3>
                     </div>
                   </div>
+                </div>
 
-                  <div class="col-md-3">
-                    <div class="card bg-success-light">
-                      <div class="card-body text-center">
-                        <i class="bi bi-graph-up-arrow" style="font-size: 32px; color: #28a745;"></i>
-                        <h6 class="mt-2">نرخی گەشەکردن</h6>
-                        <h3 id="growthRate">0%</h3>
-                      </div>
+                <div class="col-md-3">
+                  <div class="card bg-success-light">
+                    <div class="card-body text-center">
+                      <i class="bi bi-graph-up-arrow" style="font-size: 32px; color: #28a745;"></i>
+                      <h6 class="mt-2">نرخی گەشەکردن</h6>
+                      <h3 id="growthRate">0%</h3>
                     </div>
                   </div>
+                </div>
 
-                  <div class="col-md-3">
-                    <div class="card bg-warning-light">
-                      <div class="card-body text-center">
-                        <i class="bi bi-trophy" style="font-size: 32px; color: #ffc107;"></i>
-                        <h6 class="mt-2">باشترین ڕۆژ</h6>
-                        <h3 id="bestDay">-</h3>
-                      </div>
+                <div class="col-md-3">
+                  <div class="card bg-warning-light">
+                    <div class="card-body text-center">
+                      <i class="bi bi-trophy" style="font-size: 32px; color: #ffc107;"></i>
+                      <h6 class="mt-2">باشترین ڕۆژ</h6>
+                      <h3 id="bestDay">-</h3>
                     </div>
                   </div>
+                </div>
 
-                  <div class="col-md-3">
-                    <div class="card bg-danger-light">
-                      <div class="card-body text-center">
-                        <i class="bi bi-speedometer2" style="font-size: 32px; color: #dc3545;"></i>
-                        <h6 class="mt-2">تێکڕای ڕۆژانە</h6>
-                        <h3 id="dailyAverage">0</h3>
-                      </div>
+                <div class="col-md-3">
+                  <div class="card bg-danger-light">
+                    <div class="card-body text-center">
+                      <i class="bi bi-speedometer2" style="font-size: 32px; color: #dc3545;"></i>
+                      <h6 class="mt-2">تێکڕای ڕۆژانە</h6>
+                      <h3 id="dailyAverage">0</h3>
                     </div>
                   </div>
                 </div>
@@ -757,41 +752,41 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Quick Actions -->
-        <div class="row" dir="rtl">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">کردارە خێراکان</h5>
+      <!-- Quick Actions -->
+      <div class="row" dir="rtl">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">کردارە خێراکان</h5>
 
-                <div class="row text-center">
-                  <div class="col-md-3">
-                    <a href="farm1.html" class="btn btn-outline-primary w-100 mb-2">
-                      <i class="bi bi-plus-circle"></i> تۆمارکردنی نوێ
-                    </a>
-                  </div>
-                  <div class="col-md-3">
-                    <a href="calculation.html" class="btn btn-outline-success w-100 mb-2">
-                      <i class="bi bi-calculator"></i> سەرژمێری گشتی
-                    </a>
-                  </div>
-                  <div class="col-md-3">
-                    <a href="#" onclick="generateDashboardReport()" class="btn btn-outline-warning w-100 mb-2">
-                      <i class="bi bi-file-earmark-pdf"></i> ڕاپۆرتی داشبۆرد
-                    </a>
-                  </div>
-                  <div class="col-md-3">
-                    <a onclick="alert('ئەم خزمەتگوزاریە جارێ بەردەست نییە!');"
-                      class="btn btn-outline-secondary w-100 mb-2">
-                      <i class="bi bi-gear"></i> ڕێکخستنەکان
-                    </a>
-                  </div>
+              <div class="row text-center">
+                <div class="col-md-3">
+                  <a href="farm1.html" class="btn btn-outline-primary w-100 mb-2">
+                    <i class="bi bi-plus-circle"></i> تۆمارکردنی نوێ
+                  </a>
+                </div>
+                <div class="col-md-3">
+                  <a href="calculation.html" class="btn btn-outline-success w-100 mb-2">
+                    <i class="bi bi-calculator"></i> سەرژمێری گشتی
+                  </a>
+                </div>
+                <div class="col-md-3">
+                  <a href="#" onclick="generateDashboardReport()" class="btn btn-outline-warning w-100 mb-2">
+                    <i class="bi bi-file-earmark-pdf"></i> ڕاپۆرتی داشبۆرد
+                  </a>
+                </div>
+                <div class="col-md-3">
+                  <a href="settings.html" class="btn btn-outline-secondary w-100 mb-2">
+                    <i class="bi bi-gear"></i> ڕێکخستنەکان
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
     </section>
   </main>
@@ -822,30 +817,39 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/js/main.js"></script>
 
-  <script src="/assets/js/auth.js"></script>
   <!-- Libraries for PDF generation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script>
     // Check authentication on page load
-  // Check authentication on page load
-  const user = checkAuth();
-  
-  if (user) {
-    console.log('Logged in as watcher:', user.username);
-    document.getElementById('userFirstname').textContent = user.firstname;
-    document.getElementById('userFullname').textContent = `${user.firstname} ${user.lastname}`;
-    document.getElementById('welcomeName').textContent = user.firstname;
-    document.getElementById('userType').textContent = user.type;
-  }
+    function checkAuth() {
+      const token = localStorage.getItem('token');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-  // Override logout to redirect to correct path for watcher
-  function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = 'login.html';
-  }
+      if (!token || !user.username) {
+        window.location.href = 'login.html';
+        return null;
+      }
+
+      return user;
+    }
+
+    // Logout function
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = 'login.html';
+    }
+
+    // Load user data on page load
+    const user = checkAuth();
+    if (user) {
+      document.getElementById('userFirstname').textContent = user.firstname;
+      document.getElementById('userFullname').textContent = `${user.firstname} ${user.lastname}`;
+      document.getElementById('welcomeName').textContent = user.firstname;
+      document.getElementById('userType').textContent = user.type;
+    }
 
     // Global variables
     let allRecords = [];
@@ -857,7 +861,7 @@
         const token = localStorage.getItem('token');
 
         const promises = [1, 2, 3, 4].map(farmNum =>
-          fetch(`/farm${farmNum}`, {
+          fetch(`http://localhost:3000/farm${farmNum}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           }).then(res => res.json())
         );
@@ -955,19 +959,19 @@
         previousFiltered = [];
       }
 
-      // Calculate totals
-      const totalEggs = filtered.reduce((sum, r) => sum + r.eggs, 0);
-      const totalFlats = filtered.reduce((sum, r) => sum + r.flats, 0);
-      const totalPackets = filtered.reduce((sum, r) => sum + r.packets, 0);
+      // ✅ UPDATED: Use totalEggs instead of eggs
+      const totalEggs = filtered.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
+      const totalFlats = filtered.reduce((sum, r) => sum + (r.flats || 0), 0);
+      const totalPackets = filtered.reduce((sum, r) => sum + (r.packets || 0), 0);
 
-      const prevEggs = previousFiltered.reduce((sum, r) => sum + r.eggs, 0);
-      const prevFlats = previousFiltered.reduce((sum, r) => sum + r.flats, 0);
-      const prevPackets = previousFiltered.reduce((sum, r) => sum + r.packets, 0);
+      const prevEggs = previousFiltered.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
+      const prevFlats = previousFiltered.reduce((sum, r) => sum + (r.flats || 0), 0);
+      const prevPackets = previousFiltered.reduce((sum, r) => sum + (r.packets || 0), 0);
 
       // Update main cards
       document.getElementById('totalEggs').textContent = totalEggs.toLocaleString();
-      document.getElementById('totalFlats').textContent = totalFlats.toFixed(2);
-      document.getElementById('totalPackets').textContent = totalPackets.toFixed(2);
+      document.getElementById('totalFlats').textContent = totalFlats.toLocaleString();
+      document.getElementById('totalPackets').textContent = totalPackets.toLocaleString();
 
       // Calculate percentages
       const eggsChange = prevEggs > 0 ? (((totalEggs - prevEggs) / prevEggs) * 100).toFixed(1) : 0;
@@ -1016,13 +1020,13 @@
       // Daily
       const today = now.toISOString().split('T')[0];
       const todayRecords = allRecords.filter(r => r.createdAt.split('T')[0] === today);
-      const todayEggs = todayRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const todayEggs = todayRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       const yesterday = new Date(now);
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayStr = yesterday.toISOString().split('T')[0];
       const yesterdayRecords = allRecords.filter(r => r.createdAt.split('T')[0] === yesterdayStr);
-      const yesterdayEggs = yesterdayRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const yesterdayEggs = yesterdayRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       document.getElementById('dailyToday').textContent = todayEggs.toLocaleString();
       document.getElementById('dailyYesterday').textContent = yesterdayEggs.toLocaleString();
@@ -1034,7 +1038,7 @@
       const weekAgo = new Date(now);
       weekAgo.setDate(weekAgo.getDate() - 7);
       const thisWeekRecords = allRecords.filter(r => new Date(r.createdAt) >= weekAgo);
-      const thisWeekEggs = thisWeekRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const thisWeekEggs = thisWeekRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       const twoWeeksAgo = new Date(now);
       twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
@@ -1042,7 +1046,7 @@
         const date = new Date(r.createdAt);
         return date >= twoWeeksAgo && date < weekAgo;
       });
-      const lastWeekEggs = lastWeekRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const lastWeekEggs = lastWeekRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       document.getElementById('weeklyThis').textContent = thisWeekEggs.toLocaleString();
       document.getElementById('weeklyLast').textContent = lastWeekEggs.toLocaleString();
@@ -1054,7 +1058,7 @@
       const monthAgo = new Date(now);
       monthAgo.setDate(monthAgo.getDate() - 30);
       const thisMonthRecords = allRecords.filter(r => new Date(r.createdAt) >= monthAgo);
-      const thisMonthEggs = thisMonthRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const thisMonthEggs = thisMonthRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       const twoMonthsAgo = new Date(now);
       twoMonthsAgo.setDate(twoMonthsAgo.getDate() - 60);
@@ -1062,7 +1066,7 @@
         const date = new Date(r.createdAt);
         return date >= twoMonthsAgo && date < monthAgo;
       });
-      const lastMonthEggs = lastMonthRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const lastMonthEggs = lastMonthRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       document.getElementById('monthlyThis').textContent = thisMonthEggs.toLocaleString();
       document.getElementById('monthlyLast').textContent = lastMonthEggs.toLocaleString();
@@ -1082,7 +1086,7 @@
         const todayRecords = allRecords.filter(r =>
           r.farmNumber === i && r.createdAt.split('T')[0] === today
         );
-        const eggs = todayRecords.reduce((sum, r) => sum + r.eggs, 0);
+        const eggs = todayRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
         farmTotals[i] = eggs;
         if (eggs > maxEggs) maxEggs = eggs;
       }
@@ -1105,7 +1109,7 @@
         const monthRecords = allRecords.filter(r =>
           r.farmNumber === i && new Date(r.createdAt) >= monthAgo
         );
-        farmTotals[i] = monthRecords.reduce((sum, r) => sum + r.eggs, 0);
+        farmTotals[i] = monthRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
       }
 
       const sorted = Object.entries(farmTotals).sort((a, b) => b[1] - a[1]);
@@ -1136,7 +1140,7 @@
       const monthAgo = new Date(now);
       monthAgo.setDate(monthAgo.getDate() - 30);
       const thisMonth = allRecords.filter(r => new Date(r.createdAt) >= monthAgo);
-      const thisMonthEggs = thisMonth.reduce((sum, r) => sum + r.eggs, 0);
+      const thisMonthEggs = thisMonth.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       const twoMonthsAgo = new Date(now);
       twoMonthsAgo.setDate(twoMonthsAgo.getDate() - 60);
@@ -1144,7 +1148,7 @@
         const date = new Date(r.createdAt);
         return date >= twoMonthsAgo && date < monthAgo;
       });
-      const lastMonthEggs = lastMonth.reduce((sum, r) => sum + r.eggs, 0);
+      const lastMonthEggs = lastMonth.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
 
       const growthRate = lastMonthEggs > 0 ? (((thisMonthEggs - lastMonthEggs) / lastMonthEggs) * 100).toFixed(1) : 0;
       document.getElementById('growthRate').textContent = (growthRate > 0 ? '+' : '') + growthRate + '%';
@@ -1154,7 +1158,7 @@
       allRecords.forEach(r => {
         const date = r.createdAt.split('T')[0];
         if (!dailyTotals[date]) dailyTotals[date] = 0;
-        dailyTotals[date] += r.eggs;
+        dailyTotals[date] += (r.totalEggs || 0);
       });
 
       const bestDay = Object.entries(dailyTotals).sort((a, b) => b[1] - a[1])[0];
@@ -1164,7 +1168,7 @@
 
       // Daily average
       const totalDays = Object.keys(dailyTotals).length || 1;
-      const totalEggs = allRecords.reduce((sum, r) => sum + r.eggs, 0);
+      const totalEggs = allRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
       const average = Math.round(totalEggs / totalDays);
       document.getElementById('dailyAverage').textContent = average.toLocaleString();
     }
@@ -1206,7 +1210,8 @@
             if (labelEl) labelEl.textContent = timeAgo;
             if (badgeEl) badgeEl.className = `bi bi-circle-fill activity-badge ${colorClass} align-self-start`;
             if (contentEl) {
-              contentEl.innerHTML = `تۆمارکردنی <strong>${record.eggs.toLocaleString()}</strong> هێلکە لە <strong>${record.farmName}</strong>`;
+              // ✅ UPDATED: Show totalEggs
+              contentEl.innerHTML = `تۆمارکردنی <strong>${(record.totalEggs || 0).toLocaleString()}</strong> هێلکە لە <strong>${record.farmName}</strong>`;
             }
 
             activityEl.style.display = 'flex';
@@ -1251,8 +1256,7 @@
       return colors[farmNum] || 'text-muted';
     }
 
-    // Generate Dashboard Report
-    // Generate Dashboard Report - WITH FILTER SUPPORT
+    // ✅ UPDATED REPORT GENERATION WITH NEW CALCULATION
     async function generateDashboardReport() {
       if (allRecords.length === 0) {
         alert('❌ هیچ داتایەک نییە بۆ دروستکردنی ڕاپۆرت');
@@ -1289,19 +1293,19 @@
         periodText = 'هەموو تۆمارەکان';
       }
 
-      // Calculate statistics based on filtered records
-      const totalEggs = filteredRecords.reduce((sum, r) => sum + r.eggs, 0);
-      const totalFlats = filteredRecords.reduce((sum, r) => sum + r.flats, 0);
-      const totalPackets = filteredRecords.reduce((sum, r) => sum + r.packets, 0);
+      // ✅ Calculate statistics based on totalEggs
+      const totalEggs = filteredRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0);
+      const totalFlats = filteredRecords.reduce((sum, r) => sum + (r.flats || 0), 0);
+      const totalPackets = filteredRecords.reduce((sum, r) => sum + (r.packets || 0), 0);
 
       // Calculate farm statistics
       const farmStats = {};
       for (let i = 1; i <= 4; i++) {
         const farmRecords = filteredRecords.filter(r => r.farmNumber === i);
         farmStats[i] = {
-          eggs: farmRecords.reduce((sum, r) => sum + r.eggs, 0),
-          flats: farmRecords.reduce((sum, r) => sum + r.flats, 0),
-          packets: farmRecords.reduce((sum, r) => sum + r.packets, 0),
+          packets: farmRecords.reduce((sum, r) => sum + (r.packets || 0), 0),
+          flats: farmRecords.reduce((sum, r) => sum + (r.flats || 0), 0),
+          eggs: farmRecords.reduce((sum, r) => sum + (r.totalEggs || 0), 0),
           records: farmRecords.length
         };
       }
@@ -1310,14 +1314,14 @@
       let farmTableRows = '';
       for (let i = 1; i <= 4; i++) {
         farmTableRows += `
-      <tr>
-        <td>${getFarmName(i)}</td>
-        <td>${farmStats[i].eggs.toLocaleString()}</td>
-        <td>${farmStats[i].flats.toFixed(2)}</td>
-        <td>${farmStats[i].packets.toFixed(2)}</td>
-        <td>${farmStats[i].records}</td>
-      </tr>
-    `;
+          <tr>
+            <td>${getFarmName(i)}</td>
+            <td>${farmStats[i].eggs.toLocaleString()} هێلکە </td>
+            <td>${farmStats[i].packets.toLocaleString()}</td>
+            <td>${farmStats[i].flats.toLocaleString()}</td>
+            <td>${farmStats[i].records}</td>
+          </tr>
+        `;
       }
 
       // Daily statistics from filtered records
@@ -1325,7 +1329,7 @@
       filteredRecords.forEach(r => {
         const date = r.createdAt.split('T')[0];
         if (!dailyTotals[date]) dailyTotals[date] = 0;
-        dailyTotals[date] += r.eggs;
+        dailyTotals[date] += (r.totalEggs || 0);
       });
 
       const bestDay = Object.entries(dailyTotals).sort((a, b) => b[1] - a[1])[0];
@@ -1334,100 +1338,100 @@
 
       // Create report HTML
       const reportHTML = `
-    <div class="watermark">داشبۆرد</div>
-    
-    <div class="receipt-header">
-      <h1>ڕاپۆرتی داشبۆرد</h1>
-      <h2>سیستەمی سەرژمێری هێلکە - کورتەی ${periodText}</h2>
-    </div>
-
-    <div class="receipt-body">
-      <div class="info-cards">
-        <div class="info-card">
-          <h3>زانیاری پڕۆگرام</h3>
-          <p><strong>ناو:</strong> سەرژمێری هێلکە</p>
-          <p><strong>ڕاپۆرت لەلایەن:</strong> ${user.firstname} ${user.lastname}</p>
-          <p><strong>بەروار:</strong> ${new Date().toLocaleDateString('en-GB')}</p>
-          <p><strong>کات:</strong> ${new Date().toLocaleTimeString('en-GB')}</p>
-        </div>
-
-        <div class="info-card">
-          <h3>زانیاری ڕاپۆرت</h3>
-          <p><strong>ژمارەی ڕاپۆرت:</strong> #DASH-${Date.now().toString().slice(-8)}</p>
-          <p><strong>ماوە:</strong> ${periodText}</p>
-          <p><strong>کۆی فارمەکان:</strong> 4 فارم</p>
-          <p><strong>کۆی تۆمارەکان:</strong> ${filteredRecords.length.toLocaleString()}</p>
-        </div>
-      </div>
-
-      <div class="summary-section">
-        <h3 class="summary-title">کورتەی کۆی گشتی (${periodText})</h3>
-        <div class="summary-cards">
-          <div class="summary-card">
-            <h4>کۆی هێلکە</h4>
-            <p class="value">${totalEggs.toLocaleString()}</p>
-          </div>
-          <div class="summary-card">
-            <h4>کۆی تەبەق</h4>
-            <p class="value">${totalFlats.toFixed(2)}</p>
-          </div>
-          <div class="summary-card">
-            <h4>کۆی کارتۆن</h4>
-            <p class="value">${totalPackets.toFixed(2)}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-box">
-          <h4>کۆی گشتی هێلکە</h4>
-          <div class="stat-value">${totalEggs.toLocaleString()}</div>
-          <div class="stat-label">لە ${filteredRecords.length} تۆمار</div>
-        </div>
+        <div class="watermark">داشبۆرد</div>
         
-        <div class="stat-box">
-          <h4>باشترین ڕۆژ</h4>
-          <div class="stat-value">${bestDay ? bestDay[1].toLocaleString() : 0}</div>
-          <div class="stat-label">${bestDay ? new Date(bestDay[0]).toLocaleDateString('en-GB') : '-'}</div>
+        <div class="receipt-header">
+          <h1>ڕاپۆرتی داشبۆرد</h1>
+          <h2>سیستەمی سەرژمێری هێلکە - کورتەی ${periodText}</h2>
         </div>
-        
-        <div class="stat-box">
-          <h4>تێکڕای ڕۆژانە</h4>
-          <div class="stat-value">${dailyAvg.toLocaleString()}</div>
-          <div class="stat-label">هێلکە لە ڕۆژێکدا</div>
-        </div>
-        
-        <div class="stat-box">
-          <h4>ژمارەی ڕۆژە چالاکەکان</h4>
-          <div class="stat-value">${totalDays}</div>
-          <div class="stat-label">ڕۆژی تۆمارکراو</div>
-        </div>
-      </div>
 
-      <div class="table-section">
-        <h3 class="table-title">بەراوردی فارمەکان (${periodText})</h3>
-        <table class="receipt-table">
-          <thead>
-            <tr>
-              <th>فارم</th>
-              <th>هێلکە</th>
-              <th>تەبەق</th>
-              <th>کارتۆن</th>
-              <th>تۆمار</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${farmTableRows}
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <div class="receipt-body">
+          <div class="info-cards">
+            <div class="info-card">
+              <h3>زانیاری کۆمپانیا</h3>
+              <p><strong>ناو:</strong> سەرژمێری هێلکە</p>
+              <p><strong>ڕاپۆرت لەلایەن:</strong> ${user.firstname} ${user.lastname}</p>
+              <p><strong>بەروار:</strong> ${new Date().toLocaleDateString('en-GB')}</p>
+              <p><strong>کات:</strong> ${new Date().toLocaleTimeString('en-GB')}</p>
+            </div>
 
-    <div class="receipt-footer">
-      <div class="footer-line"></div>
-      <p style="font-size:11px;margin-top:10px;opacity:0.8;">دروستکراوە لە: ${new Date().toLocaleString('en-GB')} © Designed by: Ballen Baxtyar 2026</p>
-    </div>
-  `;
+            <div class="info-card">
+              <h3>زانیاری ڕاپۆرت</h3>
+              <p><strong>ژمارەی ڕاپۆرت:</strong> #DASH-${Date.now().toString().slice(-8)}</p>
+              <p><strong>ماوە:</strong> ${periodText}</p>
+              <p><strong>کۆی فارمەکان:</strong> 4 فارم</p>
+              <p><strong>کۆی تۆمارەکان:</strong> ${filteredRecords.length.toLocaleString()}</p>
+            </div>
+          </div>
+
+          <div class="summary-section">
+            <h3 class="summary-title">کورتەی کۆی گشتی (${periodText})</h3>
+            <div class="summary-cards">
+              <div class="summary-card">
+                <h4>کۆی هێلکە</h4>
+                <p class="value">${totalEggs.toLocaleString()}</p>
+              </div>
+              <div class="summary-card">
+                <h4>کۆی تەبەق</h4>
+                <p class="value">${totalFlats.toLocaleString()}</p>
+              </div>
+              <div class="summary-card">
+                <h4>کۆی کارتۆن</h4>
+                <p class="value">${totalPackets.toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <h4>کۆی گشتی هێلکە</h4>
+              <div class="stat-value">${totalEggs.toLocaleString()}</div>
+              <div class="stat-label">لە ${filteredRecords.length} تۆمار</div>
+            </div>
+            
+            <div class="stat-box">
+              <h4>باشترین ڕۆژ</h4>
+              <div class="stat-value">${bestDay ? bestDay[1].toLocaleString() : 0}</div>
+              <div class="stat-label">${bestDay ? new Date(bestDay[0]).toLocaleDateString('en-GB') : '-'}</div>
+            </div>
+            
+            <div class="stat-box">
+              <h4>تێکڕای ڕۆژانە</h4>
+              <div class="stat-value">${dailyAvg.toLocaleString()}</div>
+              <div class="stat-label">هێلکە لە ڕۆژێکدا</div>
+            </div>
+            
+            <div class="stat-box">
+              <h4>ژمارەی ڕۆژە چالاکەکان</h4>
+              <div class="stat-value">${totalDays}</div>
+              <div class="stat-label">ڕۆژی تۆمارکراو</div>
+            </div>
+          </div>
+
+          <div class="table-section">
+            <h3 class="table-title">بەراوردی فارمەکان (${periodText})</h3>
+            <table class="receipt-table">
+              <thead>
+                <tr>
+                  <th>فارم</th>
+                  <th>هێلکە</th>
+                  <th>تەبەق</th>
+                  <th>کارتۆن</th>
+                  <th>تۆمار</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${farmTableRows}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="receipt-footer">
+          <div class="footer-line"></div>
+          <p style="font-size:11px;margin-top:10px;opacity:0.8;">دروستکراوە لە: ${new Date().toLocaleString('en-GB')} © Designed by: Ballen Baxtyar 2026</p>
+        </div>
+      `;
 
       // Insert HTML into container
       const container = document.getElementById('reportContainer');
@@ -1494,6 +1498,7 @@
         alert('❌ هەڵەیەک ڕوویدا لە دروستکردنی ڕاپۆرت: ' + error.message);
       }
     }
+
     // Load data on page load
     loadAllFarmsData();
   </script>
