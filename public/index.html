@@ -861,7 +861,7 @@
         const token = localStorage.getItem('token');
 
         const promises = [1, 2, 3, 4].map(farmNum =>
-          fetch(`http://localhost:3000/farm${farmNum}`, {
+          fetch(`farm${farmNum}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           }).then(res => res.json())
         );
