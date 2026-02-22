@@ -1176,8 +1176,8 @@
     function updateRecentActivity() {
       const now = new Date();
       const today = now.toISOString().split('T')[0];
-      const todayRecords = allRecords.filter(r => r.createdAt.split('T')[0] === today)
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      const todayRecords = allRecords.filter(r => r.date.split('T')[0] === today)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 5);
 
       if (todayRecords.length > 0) {
@@ -1196,7 +1196,7 @@
           const activityEl = document.getElementById(`activity${index + 1}`);
           if (activityEl) {
             // Calculate time ago
-            const recordTime = new Date(record.date);
+            const recordTime = new Date(record.createdAt);
             const timeAgo = getTimeAgo(recordTime);
 
             // Get farm color class
