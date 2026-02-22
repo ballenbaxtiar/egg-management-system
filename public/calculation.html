@@ -634,7 +634,7 @@
           <td>${(record.flats || 0).toLocaleString()}</td>
           <td>${(record.eggs || 0).toLocaleString()}</td>
           <td><strong style="color: #0d6efd;">${(record.totalEggs || 0).toLocaleString()}</strong></td>
-          <td>${new Date(record.date).toLocaleDateString('en-GB')}</td>
+          <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
           <td>${record.updatedAt ? new Date(record.updatedAt).toLocaleDateString('en-GB') : '-'}</td>
         </tr>
       `).join('');
@@ -776,7 +776,7 @@
       const dateTo = document.getElementById('filterDateTo').value;
       if (dateFrom || dateTo) {
         filtered = filtered.filter(record => {
-          const recordDate = new Date(record.date);
+          const recordDate = new Date(record.createdAt);
           const from = dateFrom ? new Date(dateFrom) : new Date('1900-01-01');
           const to = dateTo ? new Date(dateTo) : new Date('2100-12-31');
           to.setHours(23, 59, 59, 999);
@@ -885,7 +885,7 @@
           <tr>
             <td>${index + 1}</td>
             <td>${record.farmName}</td>
-            <td>${new Date(record.date).toLocaleDateString('en-GB')}</td>
+            <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
             <td>${(record.packets || 0).toLocaleString()}</td>
             <td>${(record.flats || 0).toLocaleString()}</td>
             <td>${(record.eggs || 0).toLocaleString()}</td>
