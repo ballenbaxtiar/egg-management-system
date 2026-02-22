@@ -811,9 +811,9 @@
 
       switch (sortBy) {
         case 'date-desc':
-          return sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+          return sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         case 'date-asc':
-          return sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+          return sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
         case 'eggs-desc':
           return sorted.sort((a, b) => (b.totalEggs || 0) - (a.totalEggs || 0));
         case 'eggs-asc':

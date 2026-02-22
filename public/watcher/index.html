@@ -1160,8 +1160,8 @@
     function updateRecentActivity() {
       const now = new Date();
       const today = now.toISOString().split('T')[0];
-      const todayRecords = allRecords.filter(r => r.date.split('T')[0] === today)
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
+      const todayRecords = allRecords.filter(r => r.createdAt.split('T')[0] === today)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 5);
 
       if (todayRecords.length > 0) {
