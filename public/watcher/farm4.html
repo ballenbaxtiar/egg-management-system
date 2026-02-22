@@ -448,7 +448,7 @@
           <td>${record.eggs}</td>
           <td>${record.flats}</td>
           <td>${record.packets}</td>
-          <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
+          <td>${new Date(record.date).toLocaleDateString('en-GB')}</td>
           <td>${record.updatedAt ? new Date(record.updatedAt).toLocaleDateString('en-GB') : '-'}</td>
           </td>
         </tr>
@@ -511,7 +511,7 @@
 
       if (dateFrom || dateTo) {
         filtered = allRecords.filter(record => {
-          const recordDate = new Date(record.createdAt);
+          const recordDate = new Date(record.date);
           const from = dateFrom ? new Date(dateFrom) : new Date('1900-01-01');
           const to = dateTo ? new Date(dateTo) : new Date('2100-12-31');
           to.setHours(23, 59, 59, 999);

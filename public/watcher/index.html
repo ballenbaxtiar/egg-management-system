@@ -907,34 +907,34 @@
 
       if (period === 'today') {
         const today = now.toISOString().split('T')[0];
-        filtered = allRecords.filter(r => r.createdAt.split('T')[0] === today);
+        filtered = allRecords.filter(r => r.date.split('T')[0] === today);
 
         const yesterday = new Date(now);
         yesterday.setDate(yesterday.getDate() - 1);
         const yesterdayStr = yesterday.toISOString().split('T')[0];
-        previousFiltered = allRecords.filter(r => r.createdAt.split('T')[0] === yesterdayStr);
+        previousFiltered = allRecords.filter(r => r.date.split('T')[0] === yesterdayStr);
 
       } else if (period === 'week') {
         const weekAgo = new Date(now);
         weekAgo.setDate(weekAgo.getDate() - 7);
-        filtered = allRecords.filter(r => new Date(r.createdAt) >= weekAgo);
+        filtered = allRecords.filter(r => new Date(r.date) >= weekAgo);
 
         const twoWeeksAgo = new Date(now);
         twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
         previousFiltered = allRecords.filter(r => {
-          const date = new Date(r.createdAt);
+          const date = new Date(r.date);
           return date >= twoWeeksAgo && date < weekAgo;
         });
 
       } else if (period === 'month') {
         const monthAgo = new Date(now);
         monthAgo.setDate(monthAgo.getDate() - 30);
-        filtered = allRecords.filter(r => new Date(r.createdAt) >= monthAgo);
+        filtered = allRecords.filter(r => new Date(r.date) >= monthAgo);
 
         const twoMonthsAgo = new Date(now);
         twoMonthsAgo.setDate(twoMonthsAgo.getDate() - 60);
         previousFiltered = allRecords.filter(r => {
-          const date = new Date(r.createdAt);
+          const date = new Date(r.date);
           return date >= twoMonthsAgo && date < monthAgo;
         });
 
@@ -1003,13 +1003,13 @@
 
       // Daily
       const today = now.toISOString().split('T')[0];
-      const todayRecords = allRecords.filter(r => r.createdAt.split('T')[0] === today);
+      const todayRecords = allRecords.filter(r => r.date.split('T')[0] === today);
       const todayEggs = todayRecords.reduce((sum, r) => sum + r.eggs, 0);
 
       const yesterday = new Date(now);
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayStr = yesterday.toISOString().split('T')[0];
-      const yesterdayRecords = allRecords.filter(r => r.createdAt.split('T')[0] === yesterdayStr);
+      const yesterdayRecords = allRecords.filter(r => r.date.split('T')[0] === yesterdayStr);
       const yesterdayEggs = yesterdayRecords.reduce((sum, r) => sum + r.eggs, 0);
 
       document.getElementById('dailyToday').textContent = todayEggs.toLocaleString();
@@ -1021,13 +1021,13 @@
       // Weekly
       const weekAgo = new Date(now);
       weekAgo.setDate(weekAgo.getDate() - 7);
-      const thisWeekRecords = allRecords.filter(r => new Date(r.createdAt) >= weekAgo);
+      const thisWeekRecords = allRecords.filter(r => new Date(r.date) >= weekAgo);
       const thisWeekEggs = thisWeekRecords.reduce((sum, r) => sum + r.eggs, 0);
 
       const twoWeeksAgo = new Date(now);
       twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
       const lastWeekRecords = allRecords.filter(r => {
-        const date = new Date(r.createdAt);
+        const date = new Date(r.date);
         return date >= twoWeeksAgo && date < weekAgo;
       });
       const lastWeekEggs = lastWeekRecords.reduce((sum, r) => sum + r.eggs, 0);
@@ -1041,13 +1041,13 @@
       // Monthly
       const monthAgo = new Date(now);
       monthAgo.setDate(monthAgo.getDate() - 30);
-      const thisMonthRecords = allRecords.filter(r => new Date(r.createdAt) >= monthAgo);
+      const thisMonthRecords = allRecords.filter(r => new Date(r.date) >= monthAgo);
       const thisMonthEggs = thisMonthRecords.reduce((sum, r) => sum + r.eggs, 0);
 
       const twoMonthsAgo = new Date(now);
       twoMonthsAgo.setDate(twoMonthsAgo.getDate() - 60);
       const lastMonthRecords = allRecords.filter(r => {
-        const date = new Date(r.createdAt);
+        const date = new Date(r.date);
         return date >= twoMonthsAgo && date < monthAgo;
       });
       const lastMonthEggs = lastMonthRecords.reduce((sum, r) => sum + r.eggs, 0);
@@ -1068,7 +1068,7 @@
 
       for (let i = 1; i <= 4; i++) {
         const todayRecords = allRecords.filter(r =>
-          r.farmNumber === i && r.createdAt.split('T')[0] === today
+          r.farmNumber === i && r.date.split('T')[0] === today
         );
         const eggs = todayRecords.reduce((sum, r) => sum + r.eggs, 0);
         farmTotals[i] = eggs;
@@ -1091,7 +1091,7 @@
 
       for (let i = 1; i <= 4; i++) {
         const monthRecords = allRecords.filter(r =>
-          r.farmNumber === i && new Date(r.createdAt) >= monthAgo
+          r.farmNumber === i && new Date(r.date) >= monthAgo
         );
         farmTotals[i] = monthRecords.reduce((sum, r) => sum + r.eggs, 0);
       }
@@ -1123,13 +1123,13 @@
       const now = new Date();
       const monthAgo = new Date(now);
       monthAgo.setDate(monthAgo.getDate() - 30);
-      const thisMonth = allRecords.filter(r => new Date(r.createdAt) >= monthAgo);
+      const thisMonth = allRecords.filter(r => new Date(r.date) >= monthAgo);
       const thisMonthEggs = thisMonth.reduce((sum, r) => sum + r.eggs, 0);
 
       const twoMonthsAgo = new Date(now);
       twoMonthsAgo.setDate(twoMonthsAgo.getDate() - 60);
       const lastMonth = allRecords.filter(r => {
-        const date = new Date(r.createdAt);
+        const date = new Date(r.date);
         return date >= twoMonthsAgo && date < monthAgo;
       });
       const lastMonthEggs = lastMonth.reduce((sum, r) => sum + r.eggs, 0);
@@ -1140,7 +1140,7 @@
       // Best day
       const dailyTotals = {};
       allRecords.forEach(r => {
-        const date = r.createdAt.split('T')[0];
+        const date = r.date.split('T')[0];
         if (!dailyTotals[date]) dailyTotals[date] = 0;
         dailyTotals[date] += r.eggs;
       });
@@ -1160,8 +1160,8 @@
     function updateRecentActivity() {
       const now = new Date();
       const today = now.toISOString().split('T')[0];
-      const todayRecords = allRecords.filter(r => r.createdAt.split('T')[0] === today)
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      const todayRecords = allRecords.filter(r => r.date.split('T')[0] === today)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 5);
 
       if (todayRecords.length > 0) {
@@ -1180,7 +1180,7 @@
           const activityEl = document.getElementById(`activity${index + 1}`);
           if (activityEl) {
             // Calculate time ago
-            const recordTime = new Date(record.createdAt);
+            const recordTime = new Date(record.date);
             const timeAgo = getTimeAgo(recordTime);
 
             // Get farm color class
@@ -1259,17 +1259,17 @@
 
       if (currentPeriod === 'today') {
         const today = now.toISOString().split('T')[0];
-        filteredRecords = allRecords.filter(r => r.createdAt.split('T')[0] === today);
+        filteredRecords = allRecords.filter(r => r.date.split('T')[0] === today);
         periodText = 'ئەمڕۆ';
       } else if (currentPeriod === 'week') {
         const weekAgo = new Date(now);
         weekAgo.setDate(weekAgo.getDate() - 7);
-        filteredRecords = allRecords.filter(r => new Date(r.createdAt) >= weekAgo);
+        filteredRecords = allRecords.filter(r => new Date(r.date) >= weekAgo);
         periodText = 'ئەم حەفتەیە (7 ڕۆژی ڕابردوو)';
       } else if (currentPeriod === 'month') {
         const monthAgo = new Date(now);
         monthAgo.setDate(monthAgo.getDate() - 30);
-        filteredRecords = allRecords.filter(r => new Date(r.createdAt) >= monthAgo);
+        filteredRecords = allRecords.filter(r => new Date(r.date) >= monthAgo);
         periodText = 'ئەم مانگە (30 ڕۆژی ڕابردوو)';
       } else {
         filteredRecords = allRecords;
@@ -1310,7 +1310,7 @@
       // Daily statistics from filtered records
       const dailyTotals = {};
       filteredRecords.forEach(r => {
-        const date = r.createdAt.split('T')[0];
+        const date = r.date.split('T')[0];
         if (!dailyTotals[date]) dailyTotals[date] = 0;
         dailyTotals[date] += r.eggs;
       });

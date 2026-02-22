@@ -1158,7 +1158,7 @@
           <td>${record.eggs.toLocaleString()}</td>
           <td>${record.flats.toFixed(2)}</td>
           <td>${record.packets.toFixed(2)}</td>
-          <td>${new Date(record.createdAt).toLocaleDateString('en-GB')}</td>
+          <td>${new Date(record.date).toLocaleDateString('en-GB')}</td>
           <td>${record.updatedAt ? new Date(record.updatedAt).toLocaleDateString('en-GB') : '-'}</td>
         </tr>
       `).join('');
@@ -1298,7 +1298,7 @@
       const dateTo = document.getElementById('filterDateTo').value;
       if (dateFrom || dateTo) {
         filtered = filtered.filter(record => {
-          const recordDate = new Date(record.createdAt);
+          const recordDate = new Date(record.date);
           const from = dateFrom ? new Date(dateFrom) : new Date('1900-01-01');
           const to = dateTo ? new Date(dateTo) : new Date('2100-12-31');
           to.setHours(23, 59, 59, 999);
@@ -1333,9 +1333,9 @@
 
       switch (sortBy) {
         case 'date-desc':
-          return sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          return sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
         case 'date-asc':
-          return sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+          return sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
         case 'eggs-desc':
           return sorted.sort((a, b) => b.eggs - a.eggs);
         case 'eggs-asc':
