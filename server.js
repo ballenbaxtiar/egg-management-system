@@ -102,23 +102,43 @@ const EGGS_PER_PACKET = 360; // 30 × 12
 // ============================================
 mongoose.set("strictQuery", false);
 
-const connectDB = async () => {
+const connectDB = async (retryCount = 0) => {
+  const MAX_RETRIES = 3;
   try {
     if (!process.env.MONGODB_URI) {
-      throw new Error("MONGODB_URI is not defined in environment variables");
+      throw new Error("MONGODB_URI is not defined in environment variables. Please check your .env file.");
     }
     
-    console.log("⏳ Connecting to MongoDB...");
-    await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-    });
+    console.log(`⏳ Connecting to MongoDB (Attempt ${retryCount + 1})...`);
     
-    console.log("✅ MongoDB Connected");
+    // Detailed connection options for better stability
+    const options = {
+      serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+      socketTimeoutMS: 45000,         // Close sockets after 45 seconds of inactivity
+      family: 4                       // Use IPv4, skip trying IPv6
+    };
+
+    await mongoose.connect(process.env.MONGODB_URI, options);
+    
+    console.log("✅ MongoDB Connected Successfully");
     await testDatabaseConnection();
   } catch (err) {
-    console.error("❌ MongoDB Connection Error:", err.message);
-    // Don't exit process in development, but in production you might want to
-    // process.exit(1);
+    console.error("❌ MongoDB Connection Error Details:");
+    console.error(`   - Message: ${err.message}`);
+    console.error(`   - Code: ${err.code || 'N/A'}`);
+    
+    if (err.message.includes('IP not whitelisted') || err.message.includes('Could not connect to any servers')) {
+      console.error("   - Suggestion: Check if your IP is whitelisted in MongoDB Atlas.");
+    } else if (err.message.includes('Authentication failed')) {
+      console.error("   - Suggestion: Check your database username and password in MONGODB_URI.");
+    }
+
+    if (retryCount < MAX_RETRIES) {
+      console.log(`🔄 Retrying connection in 5 seconds... (${retryCount + 1}/${MAX_RETRIES})`);
+      setTimeout(() => connectDB(retryCount + 1), 5000);
+    } else {
+      console.error("❌ Max connection retries reached. Please check your network and database settings.");
+    }
   }
 };
 
