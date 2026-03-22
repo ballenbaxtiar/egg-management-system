@@ -102,16 +102,34 @@ const EGGS_PER_PACKET = 360; // 30 × 12
 // ============================================
 mongoose.set("strictQuery", false);
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
+const connectDB = async () => {
+  try {
+    if (!process.env.MONGODB_URI) {
+      throw new Error("MONGODB_URI is not defined in environment variables");
+    }
+    
+    console.log("⏳ Connecting to MongoDB...");
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    });
+    
     console.log("✅ MongoDB Connected");
-    testDatabaseConnection();
-  })
-  .catch((err) => console.log("❌ MongoDB Connection Error:", err));
+    await testDatabaseConnection();
+  } catch (err) {
+    console.error("❌ MongoDB Connection Error:", err.message);
+    // Don't exit process in development, but in production you might want to
+    // process.exit(1);
+  }
+};
 
 async function testDatabaseConnection() {
   try {
+    // Only run if connected
+    if (mongoose.connection.readyState !== 1) {
+      console.log("⚠️ Cannot test database: Not connected");
+      return;
+    }
+    
     const count = await User.countDocuments();
     console.log(`📊 Found ${count} users in database`);
 
@@ -119,13 +137,17 @@ async function testDatabaseConnection() {
       const users = await User.find({}).limit(5);
       console.log("👥 Sample users:");
       users.forEach((user, i) => {
-        console.log(`${i + 1}. ${user._id.username} - ${user._id.type}`);
+        const username = user._id?.username || "N/A";
+        const type = user._id?.type || "N/A";
+        console.log(`${i + 1}. ${username} - ${type}`);
       });
     }
   } catch (error) {
     console.error("❌ Error checking database:", error);
   }
 }
+
+connectDB();
 
 // ============================================
 // JWT MIDDLEWARE
@@ -205,6 +227,12 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      console.log("❌ Database not connected");
+      return res.status(503).json({ message: "Database is not connected. Please try again later." });
+    }
+
     console.log("🔍 Looking for user:", username);
 
     const user = await User.findOne({ "_id.username": username }).lean();
@@ -725,8 +753,10 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(
-    `📊 MongoDB: ${mongoose.connection.readyState === 1 ? "Connected" : "Disconnected"}`,
-  );
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+  
+  // Monitor connection state
+  mongoose.connection.on('connected', () => console.log('📊 MongoDB: Connected'));
+  mongoose.connection.on('disconnected', () => console.log('📊 MongoDB: Disconnected'));
+  mongoose.connection.on('error', (err) => console.error('📊 MongoDB Error:', err));
 });
